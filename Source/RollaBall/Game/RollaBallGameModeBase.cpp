@@ -2,4 +2,22 @@
 
 
 #include "RollaBallGameModeBase.h"
+#include "Kismet/GameplayStatics.h"
+#include "RollaBall/Items/RollaBallItemBase.h"
 
+void ARollaBallGameModeBase::BeginPlay()
+{	//type array of actors.
+	TArray<AActor*> Items;
+	//Gets all static items in current level that is of ARollaBallItemBase, and store them in a list of the items.
+	UGameplayStatics::GetAllActorsOfClass(GetWorld(), ARollaBallItemBase::StaticClass(), Items);
+	ItemsInLevel = Items.Num();
+}
+
+void ARollaBallGameModeBase::UpdateItemText()
+{
+}
+
+void ARollaBallGameModeBase::ItemCollected()
+{
+	ItemsCollected++;	
+}

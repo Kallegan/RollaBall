@@ -13,5 +13,22 @@ UCLASS()
 class ROLLABALL_API ARollaBallGameModeBase : public AGameModeBase
 {
 	GENERATED_BODY()
+
+protected:
+
+	int32 ItemsCollected = 0;
+	int32 ItemsInLevel = 0;
+
+	//TODO - Implement Widget
+	
+	virtual void BeginPlay() override;
+
+	//updates gui.
+	void UpdateItemText();
+
+
+public:
+	void ItemCollected();
+	
 	
 };
