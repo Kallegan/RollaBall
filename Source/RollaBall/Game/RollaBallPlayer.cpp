@@ -4,7 +4,6 @@
 #include "RollaBallPlayer.h"
 #include "GameFramework/SpringArmComponent.h"
 #include "Camera/CameraComponent.h"
-#include "Components/SphereComponent.h"
 
 // Sets default values
 ARollaBallPlayer::ARollaBallPlayer()
@@ -12,29 +11,33 @@ ARollaBallPlayer::ARollaBallPlayer()
  	// Set this pawn to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
-	Sphere = CreateDefaultSubobject<USphereComponent>("Sphere");
+	
 	Mesh = CreateDefaultSubobject<UStaticMeshComponent>("Mesh");
 	SpringArm = CreateDefaultSubobject<USpringArmComponent>("SpringArm");
 	Camera = CreateDefaultSubobject<UCameraComponent>("Camera");
 	
-	RootComponent = Sphere;
-	Mesh->SetupAttachment(Sphere);
+	RootComponent = Mesh;	
 	SpringArm->SetupAttachment(Mesh);
 	Camera->SetupAttachment(SpringArm);
+	
+	Mesh->SetSimulatePhysics(true);
+
+	Mesh->OnComponentHit.AddDynamic(this, &ARollaBallPlayer::OnHit);
 }
 
 // Called when the game starts or when spawned
 void ARollaBallPlayer::BeginPlay()
 {
 	Super::BeginPlay();
-	
+
+	JumpImpulse *= Mesh->GetMass();
+	MoveForce *= Mesh->GetMass();	
 }
 
 // Called every frame
 void ARollaBallPlayer::Tick(float DeltaTime)
 {
-	Super::Tick(DeltaTime);
-
+	Super::Tick(DeltaTime); 
 }
 
 // Called to bind functionality to input
@@ -52,29 +55,40 @@ void ARollaBallPlayer::SetupPlayerInputComponent(UInputComponent* PlayerInputCom
 
 void ARollaBallPlayer::Jump()
 {
-	if(bCanJump)
+	if(JumpCount < MaxJumpCount)
 	{
 		const FVector Jump = Camera->GetUpVector() * JumpImpulse;
-		Sphere->AddImpulse(Jump);
-	}
-	
-	
+		Mesh->AddImpulse(Jump);
+		JumpCount++;		
+	}	
 }
 
 void ARollaBallPlayer::Dash()
 {
 	const FVector Dash = Camera->GetForwardVector() * JumpImpulse;
-	Sphere->AddImpulse(Dash);
+	Mesh->AddImpulse(Dash);
 }
 
 void ARollaBallPlayer::MoveForward(float Value)
 {
 	const FVector Forward = Camera->GetForwardVector() * MoveForce * Value;
-	Sphere->AddForce(Forward);
+	Mesh->AddForce(Forward);
 }
 
 void ARollaBallPlayer::MoveRight(float Value)
 {
 	const FVector Right = Camera->GetRightVector() * MoveForce * Value;
-	Sphere->AddForce(Right);
+	Mesh->AddForce(Right);
+}
+
+void ARollaBallPlayer::OnHit(UPrimitiveComponent* HitComponent, AActor* OtherActor,
+                             UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit)
+{
+	const float HitDirection = Hit.Normal.Z;	
+	
+	if(HitDirection > 0)	
+		JumpCount = 0;
+		
+	
+		
 }
