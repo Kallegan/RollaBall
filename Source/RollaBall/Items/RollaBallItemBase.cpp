@@ -2,14 +2,17 @@
 
 
 #include "RollaBallItemBase.h"
+
+#include "RollaBall/Game/RollaBallGameModeBase.h"
 #include "RollaBall/Game/RollaBallPlayer.h"
 
 
+class ARollaBallGameModeBase;
 // Sets default values
 ARollaBallItemBase::ARollaBallItemBase()
 {
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
-	PrimaryActorTick.bCanEverTick = true;
+	PrimaryActorTick.bCanEverTick = false;
 
 	Mesh = CreateDefaultSubobject<UStaticMeshComponent>("Mesh");
 	RootComponent = Mesh;
@@ -33,16 +36,15 @@ void ARollaBallItemBase::OverlapBegin(UPrimitiveComponent* OverlappedComponent, 
 	}
 }
 
-void ARollaBallItemBase::Collected_Implementation()
-{
-	//todo: Do stuff when collecting... 
-}
-
-
-// Called every frame
 void ARollaBallItemBase::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-
 }
 
+void ARollaBallItemBase::Collected_Implementation()
+{
+	if(ARollaBallGameModeBase* GameMode = Cast<ARollaBallGameModeBase>(GetWorld()->GetAuthGameMode()))
+	{
+		GameMode->ItemCollected();
+	}
+}

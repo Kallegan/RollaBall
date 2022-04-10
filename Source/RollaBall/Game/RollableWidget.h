@@ -17,7 +17,7 @@ class ROLLABALL_API URollableWidget : public UUserWidget
 
 public:
 
-
+	UFUNCTION(BlueprintImplementableEvent)
 	void SetItemText(int32 ItemsCollected, int32 ItemsInLevel);
 	
 };

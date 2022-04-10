@@ -6,9 +6,8 @@
 #include "GameFramework/GameModeBase.h"
 #include "RollaBallGameModeBase.generated.h"
 
-/**
- * 
- */
+class URollableWidget;
+
 UCLASS()
 class ROLLABALL_API ARollaBallGameModeBase : public AGameModeBase
 {
@@ -19,7 +18,12 @@ protected:
 	int32 ItemsCollected = 0;
 	int32 ItemsInLevel = 0;
 
-	//TODO - Implement Widget
+	UPROPERTY(EditAnywhere, Category= "Widgets")
+	TSubclassOf<class UUserWidget> GameWidgetClass;
+
+	UPROPERTY()
+	URollableWidget* GameWidget;
+
 	
 	virtual void BeginPlay() override;
 
@@ -28,7 +32,6 @@ protected:
 
 
 public:
-	void ItemCollected();
-	
+	void ItemCollected();	
 	
 };
