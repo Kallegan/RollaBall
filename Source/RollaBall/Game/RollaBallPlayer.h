@@ -6,7 +6,7 @@
 #include "GameFramework/Pawn.h"
 #include "RollaBallPlayer.generated.h"
 
-
+class USphereComponent;
 class USpringArmComponent;	
 class UCameraComponent;
 
@@ -23,7 +23,9 @@ protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
-		
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components")
+	USphereComponent* Sphere;
+	
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components")
 	UStaticMeshComponent* Mesh;
 
@@ -33,9 +35,12 @@ protected:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components")
 	UCameraComponent* Camera;
 
+	UPROPERTY(EditDefaultsOnly)
 	float MoveForce = 500.f;
-	float JumpImpulse = 500.f;
+	UPROPERTY(EditDefaultsOnly)
+	float JumpImpulse = 100.f;
 	int16 MaxJumpCount = 1;
+	bool bCanJump = MaxJumpCount > 0;
 
 
 	
@@ -47,9 +52,10 @@ public:
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 	
 private:
-	void MoveRight(float Value);
-	void MoveForward(float Value);
 	void Jump();
+	void Dash();
+	void MoveForward(float Value);	
+	void MoveRight(float Value);	
 
 	int16 JumpCount = 0;
 

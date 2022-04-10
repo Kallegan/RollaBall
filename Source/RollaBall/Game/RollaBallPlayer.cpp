@@ -4,6 +4,7 @@
 #include "RollaBallPlayer.h"
 #include "GameFramework/SpringArmComponent.h"
 #include "Camera/CameraComponent.h"
+#include "Components/SphereComponent.h"
 
 // Sets default values
 ARollaBallPlayer::ARollaBallPlayer()
@@ -11,10 +12,13 @@ ARollaBallPlayer::ARollaBallPlayer()
  	// Set this pawn to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
+	Sphere = CreateDefaultSubobject<USphereComponent>("Sphere");
 	Mesh = CreateDefaultSubobject<UStaticMeshComponent>("Mesh");
 	SpringArm = CreateDefaultSubobject<USpringArmComponent>("SpringArm");
-	Camera = CreateDefaultSubobject<UCameraComponent>("Camera");	
-	RootComponent = Mesh;
+	Camera = CreateDefaultSubobject<UCameraComponent>("Camera");
+	
+	RootComponent = Sphere;
+	Mesh->SetupAttachment(Sphere);
 	SpringArm->SetupAttachment(Mesh);
 	Camera->SetupAttachment(SpringArm);
 }
@@ -38,23 +42,39 @@ void ARollaBallPlayer::SetupPlayerInputComponent(UInputComponent* PlayerInputCom
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
 
-}
+	InputComponent->BindAction("Jump", IE_Pressed, this, &ARollaBallPlayer::Jump);
+	InputComponent->BindAction("Dash", IE_Pressed, this, &ARollaBallPlayer::Dash);
 
-void ARollaBallPlayer::MoveRight(float Value)
-{
-	
-}
+	InputComponent->BindAxis("MoveForward", this, &ARollaBallPlayer::MoveForward);
+	InputComponent->BindAxis("MoveRight", this, &ARollaBallPlayer::MoveRight);
 
-void ARollaBallPlayer::MoveForward(float Value)
-{
-	
 }
 
 void ARollaBallPlayer::Jump()
 {
+	if(bCanJump)
+	{
+		const FVector Jump = Camera->GetUpVector() * JumpImpulse;
+		Sphere->AddImpulse(Jump);
+	}
+	
 	
 }
 
+void ARollaBallPlayer::Dash()
+{
+	const FVector Dash = Camera->GetForwardVector() * JumpImpulse;
+	Sphere->AddImpulse(Dash);
+}
 
+void ARollaBallPlayer::MoveForward(float Value)
+{
+	const FVector Forward = Camera->GetForwardVector() * MoveForce * Value;
+	Sphere->AddForce(Forward);
+}
 
-
+void ARollaBallPlayer::MoveRight(float Value)
+{
+	const FVector Right = Camera->GetRightVector() * MoveForce * Value;
+	Sphere->AddForce(Right);
+}
