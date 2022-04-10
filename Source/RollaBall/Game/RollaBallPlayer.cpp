@@ -51,6 +51,8 @@ void ARollaBallPlayer::SetupPlayerInputComponent(UInputComponent* PlayerInputCom
 	InputComponent->BindAxis("MoveForward", this, &ARollaBallPlayer::MoveForward);
 	InputComponent->BindAxis("MoveRight", this, &ARollaBallPlayer::MoveRight);
 
+	InputComponent->BindAxis("LookUp", this, &ARollaBallPlayer::LookUp);
+	InputComponent->BindAxis("LookRight", this, &ARollaBallPlayer::LookRight);
 }
 
 void ARollaBallPlayer::Jump()
@@ -80,6 +82,24 @@ void ARollaBallPlayer::MoveRight(float Value)
 	const FVector Right = Camera->GetRightVector() * MoveForce * Value;
 	Mesh->AddForce(Right);
 }
+
+void ARollaBallPlayer::LookUp(float AxisValue)
+{	
+	AddControllerPitchInput(AxisValue * BaseLookUpRate * GetWorld()->GetDeltaSeconds());
+}
+
+
+void ARollaBallPlayer::LookRight(float AxisValue)
+{
+	AddControllerYawInput(AxisValue * BaseLookRightRate * GetWorld()->GetDeltaSeconds());
+
+}
+/*
+void ARollaBallPlayer::StartCameraShake(float Scale)
+{
+	GetWorld()->GetFirstPlayerController()->PlayerCameraManager->StartCameraShake(CamShake, Scale);
+}*/
+
 
 void ARollaBallPlayer::OnHit(UPrimitiveComponent* HitComponent, AActor* OtherActor,
                              UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit)

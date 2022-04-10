@@ -50,9 +50,18 @@ private:
 	void Dash();
 	void MoveForward(float Value);	
 	void MoveRight(float Value);
+	void LookUp(float AxisValue);
+	void LookRight(float AxisValue);
+	//void StartCameraShake(float Scale);
 
 	UPROPERTY(EditDefaultsOnly)
 	int16 JumpCount = 0;
+	UPROPERTY(EditAnywhere)
+	float BaseLookUpRate = 10.f;
+	UPROPERTY(EditAnywhere)
+	float BaseLookRightRate = 10.f;
+	
+	
 
 	UFUNCTION()
 	void OnHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit );

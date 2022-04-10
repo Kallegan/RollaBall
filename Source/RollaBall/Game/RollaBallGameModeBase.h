@@ -19,7 +19,7 @@ protected:
 	int32 ItemsInLevel = 0;
 
 	UPROPERTY(EditAnywhere, Category= "Widgets")
-	TSubclassOf<class UUserWidget> GameWidgetClass;
+	TSubclassOf<UUserWidget> GameWidgetClass;
 
 	UPROPERTY()
 	URollableWidget* GameWidget;
