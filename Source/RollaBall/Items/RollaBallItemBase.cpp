@@ -2,6 +2,7 @@
 
 
 #include "RollaBallItemBase.h"
+#include "RollaBall/Game/RollaBallPlayer.h"
 
 
 // Sets default values
@@ -25,11 +26,16 @@ void ARollaBallItemBase::BeginPlay()
 void ARollaBallItemBase::OverlapBegin(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,
 	UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
+	//if casting to player isnt null
+	if(Cast<ARollaBallPlayer>(OtherActor) != nullptr)
+	{
+		Collected();
+	}
 }
 
 void ARollaBallItemBase::Collected_Implementation()
 {
-	
+	//todo: Do stuff when collecting... 
 }
 
 
