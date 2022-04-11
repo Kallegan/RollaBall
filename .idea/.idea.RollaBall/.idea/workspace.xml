@@ -9,10 +9,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2fed9463-47e8-4be3-89bd-412bbdf6df6c" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/.idea.RollaBall/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.RollaBall/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.RollaBall/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/RollaBall/Game/RollaBallPlayer.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/RollaBall/Game/RollaBallPlayer.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/RollaBall/Game/RollaBallPlayer.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/RollaBall/Game/RollaBallPlayer.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Blueprints/Items/BP_ItemBase.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprints/Items/BP_ItemBase.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/__ExternalActors__/NewMap/2/6Y/1DUY5C3MEEXGKN8UDOKRIH.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/__ExternalActors__/NewMap/2/6Y/1DUY5C3MEEXGKN8UDOKRIH.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/__ExternalActors__/NewMap/6/ZX/GJXPGXUEAB935LQ2GGF9FH.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/__ExternalActors__/NewMap/6/ZX/GJXPGXUEAB935LQ2GGF9FH.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/__ExternalActors__/NewMap/7/R4/Y5IK8L7H1BCT8ZJMNKYE8B.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/__ExternalActors__/NewMap/7/R4/Y5IK8L7H1BCT8ZJMNKYE8B.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RollaBall.uproject" beforeDir="false" afterPath="$PROJECT_DIR$/RollaBall.uproject" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -22,6 +24,9 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/Intermediate/Build/Win64/UnrealEditor/Inc/RollaBall/RollaBallItemBase.gen.cpp" root0="SKIP_HIGHLIGHTING" />
+  </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
@@ -30,19 +35,19 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager" selected="C++ Project.RollaBall">
     <configuration name="RollaBall" type="CppProject" factoryName="C++ Project">
       <configuration_1>
@@ -168,6 +173,8 @@
       <workItem from="1649541730105" duration="2691000" />
       <workItem from="1649545994317" duration="242000" />
       <workItem from="1649546635766" duration="2654000" />
+      <workItem from="1649678584480" duration="622000" />
+      <workItem from="1649683628969" duration="1873000" />
     </task>
     <servers />
   </component>
