@@ -94,11 +94,6 @@ void ARollaBallPlayer::LookRight(float AxisValue)
 	AddControllerYawInput(AxisValue * BaseLookRightRate * GetWorld()->GetDeltaSeconds());
 
 }
-/*
-void ARollaBallPlayer::StartCameraShake(float Scale)
-{
-	GetWorld()->GetFirstPlayerController()->PlayerCameraManager->StartCameraShake(CamShake, Scale);
-}*/
 
 
 void ARollaBallPlayer::OnHit(UPrimitiveComponent* HitComponent, AActor* OtherActor,
