@@ -30,13 +30,17 @@ protected:
 	USpringArmComponent* SpringArm;
 	
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components")
-	UCameraComponent* Camera;
+	UCameraComponent* Camera;	
 
 	UPROPERTY(EditDefaultsOnly)
 	float MoveForce = 500.f;
 	UPROPERTY(EditDefaultsOnly)
 	float JumpImpulse = 100.f;
 	int16 MaxJumpCount = 1;
+	bool bHoldCamera = false;
+
+	UPROPERTY()
+	APlayerController* MouseCameraLock;
 	
 public:	
 	// Called every frame
@@ -48,6 +52,9 @@ public:
 private:
 	void Jump();
 	void Dash();
+
+	void GrabCamera();
+	void ReleaseCamera();
 	void MoveForward(float Value);	
 	void MoveRight(float Value);
 	void LookUp(float AxisValue);
