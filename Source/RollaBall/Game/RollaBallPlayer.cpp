@@ -43,8 +43,9 @@ void ARollaBallPlayer::BeginPlay()
 void ARollaBallPlayer::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-
 	
+	if(bIsCharging)
+	SuperCharge+=DeltaTime;		
 }
 
 // Called to bind functionality to input
@@ -53,19 +54,15 @@ void ARollaBallPlayer::SetupPlayerInputComponent(UInputComponent* PlayerInputCom
 	Super::SetupPlayerInputComponent(PlayerInputComponent);	
 
 	InputComponent->BindAction("Jump", IE_Pressed, this, &ARollaBallPlayer::Jump);
-	InputComponent->BindAction("Dash", IE_Pressed, this, &ARollaBallPlayer::Dash);
-	InputComponent->BindAction("CameraLook", IE_Pressed, this, &ARollaBallPlayer::GrabCamera);
-	InputComponent->BindAction("CameraLook", IE_Released, this, &ARollaBallPlayer::ReleaseCamera);
+	InputComponent->BindAction("SuperCharge", IE_Pressed, this, &ARollaBallPlayer::Charge);
+	InputComponent->BindAction("SuperCharge", IE_Released, this, &ARollaBallPlayer::Release);
 	
 
 	InputComponent->BindAxis("MoveForward", this, &ARollaBallPlayer::MoveForward);
 	InputComponent->BindAxis("MoveRight", this, &ARollaBallPlayer::MoveRight);
 
 	InputComponent->BindAxis("LookUp", this, &ARollaBallPlayer::LookUp);
-	InputComponent->BindAxis("LookRight", this, &ARollaBallPlayer::LookRight);
-
-	MouseCameraLock = Cast<APlayerController>(GetController());
-	FInputModeGameAndUI InputMode;	
+	InputComponent->BindAxis("LookRight", this, &ARollaBallPlayer::LookRight);	
 }
 
 void ARollaBallPlayer::Jump()
@@ -74,39 +71,24 @@ void ARollaBallPlayer::Jump()
 	{
 		const FVector Jump = Camera->GetUpVector() * JumpImpulse;
 		Mesh->AddImpulse(Jump);
-		JumpCount++;		
+		JumpCount++;
+		bGrounded = false;
 	}	
 }
 
-void ARollaBallPlayer::Dash()
+void ARollaBallPlayer::Charge()
 {
-	const FVector Dash = Camera->GetForwardVector() * JumpImpulse;
+	bIsCharging = true;
+	ChargeStarted();
+}
+
+void ARollaBallPlayer::Release()
+{
+	bIsCharging = false;	
+	const FVector Dash = Camera->GetForwardVector() * JumpImpulse*SuperCharge;
 	Mesh->AddImpulse(Dash);
-}
-
-void ARollaBallPlayer::GrabCamera()
-{
-	if (MouseCameraLock)
-	{
-		MouseCameraLock->bShowMouseCursor = false; 
-		MouseCameraLock->bEnableClickEvents = false; 
-		MouseCameraLock->bEnableMouseOverEvents = false;
-		GEngine->GameViewport->Viewport->LockMouseToViewport(false);	
-		
-	}
-	bHoldCamera = true;
-}
-
-void ARollaBallPlayer::ReleaseCamera()
-{
-	if (MouseCameraLock)
-	{
-		MouseCameraLock->bShowMouseCursor = true; 
-		MouseCameraLock->bEnableClickEvents = true; 
-		MouseCameraLock->bEnableMouseOverEvents = true;
-		GEngine->GameViewport->Viewport->LockMouseToViewport(true);
-	}	
-	bHoldCamera = false;
+	SuperCharge = 0.f;
+	ChargeReleased();
 }
 
 void ARollaBallPlayer::MoveForward(float Value)
@@ -122,15 +104,13 @@ void ARollaBallPlayer::MoveRight(float Value)
 }
 
 void ARollaBallPlayer::LookUp(float AxisValue)
-{
-	if(bHoldCamera)
+{	
 	AddControllerPitchInput(AxisValue * BaseLookUpRate * GetWorld()->GetDeltaSeconds());
 }
 
 
 void ARollaBallPlayer::LookRight(float AxisValue)
-{
-	if(bHoldCamera)
+{	
 	AddControllerYawInput(AxisValue * BaseLookRightRate * GetWorld()->GetDeltaSeconds());
 }
 
@@ -140,9 +120,20 @@ void ARollaBallPlayer::OnHit(UPrimitiveComponent* HitComponent, AActor* OtherAct
 {
 	const float HitDirection = Hit.Normal.Z;	
 	
-	if(HitDirection > 0)	
+	if(HitDirection > 0 && !bGrounded && JumpCount != 0)
+	{
 		JumpCount = 0;
-		
-	
+		bGrounded = true;
+	}
 		
 }
+
+void ARollaBallPlayer::ChargeStarted_Implementation()
+{
+}
+
+void ARollaBallPlayer::ChargeReleased_Implementation()
+{
+}
+
+

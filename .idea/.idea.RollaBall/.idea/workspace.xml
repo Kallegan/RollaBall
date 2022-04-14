@@ -11,6 +11,7 @@
     <list default="true" id="2fed9463-47e8-4be3-89bd-412bbdf6df6c" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.RollaBall/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.RollaBall/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Config/DefaultInput.ini" beforeDir="false" afterPath="$PROJECT_DIR$/Config/DefaultInput.ini" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Blueprints/Game/BP_Player.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprints/Game/BP_Player.uasset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Source/RollaBall/Game/RollaBallPlayer.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/RollaBall/Game/RollaBallPlayer.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Source/RollaBall/Game/RollaBallPlayer.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/RollaBall/Game/RollaBallPlayer.h" afterDir="false" />
     </list>
@@ -173,7 +174,12 @@
       <workItem from="1649546635766" duration="2654000" />
       <workItem from="1649678584480" duration="622000" />
       <workItem from="1649683628969" duration="1873000" />
-      <workItem from="1649856863332" duration="3337000" />
+      <workItem from="1649856863332" duration="3839000" />
+      <workItem from="1649862016385" duration="364000" />
+      <workItem from="1649872308411" duration="149000" />
+      <workItem from="1649873146841" duration="173000" />
+      <workItem from="1649877756684" duration="4002000" />
+      <workItem from="1649955422267" duration="5153000" />
     </task>
     <servers />
   </component>

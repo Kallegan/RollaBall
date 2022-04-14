@@ -37,7 +37,8 @@ protected:
 	UPROPERTY(EditDefaultsOnly)
 	float JumpImpulse = 100.f;
 	int16 MaxJumpCount = 1;
-	bool bHoldCamera = false;
+	bool bHoldCamera = true;
+	bool bGrounded = true;
 
 	UPROPERTY()
 	APlayerController* MouseCameraLock;
@@ -53,24 +54,35 @@ private:
 	void Jump();
 	void Dash();
 
-	void GrabCamera();
-	void ReleaseCamera();
+	void Charge();
+	void Release();
 	void MoveForward(float Value);	
 	void MoveRight(float Value);
 	void LookUp(float AxisValue);
 	void LookRight(float AxisValue);
-	//void StartCameraShake(float Scale);
+	
 
 	UPROPERTY(EditDefaultsOnly)
-	int16 JumpCount = 0;
+	int16 JumpCount = 0;	
 	UPROPERTY(EditAnywhere)
 	float BaseLookUpRate = 10.f;
 	UPROPERTY(EditAnywhere)
-	float BaseLookRightRate = 10.f;
-	
+	float BaseLookRightRate = 10.f; 
+	UPROPERTY(VisibleAnywhere)
+	float SuperCharge = 0.f;
+	UPROPERTY()
+	bool bIsCharging;	
 	
 
+public:
 	UFUNCTION()
 	void OnHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit );
 
+	UFUNCTION(BlueprintNativeEvent)
+	void ChargeStarted();	
+	
+	UFUNCTION(BlueprintNativeEvent)
+	void ChargeReleased();
+
+	
 };
