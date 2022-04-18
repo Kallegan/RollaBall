@@ -36,7 +36,7 @@ protected:
 	float MoveForce = 500.f;
 	UPROPERTY(EditDefaultsOnly)
 	float JumpImpulse = 100.f;
-	int16 MaxJumpCount = 1;
+	int16 MaxDashCount = 1;
 	bool bHoldCamera = true;
 	bool bGrounded = true;
 
@@ -51,9 +51,7 @@ public:
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 	
 private:
-	void Jump();
-	void Dash();
-
+	
 	void Charge();
 	void Release();
 	void MoveForward(float Value);	
@@ -63,13 +61,13 @@ private:
 	
 
 	UPROPERTY(EditDefaultsOnly)
-	int16 JumpCount = 0;	
+	int16 DashCount = 0;	
 	UPROPERTY(EditAnywhere)
 	float CameraLookRate = 20.f; 
 	UPROPERTY()
 	float SuperCharge = 0.f;
 	UPROPERTY(VisibleAnywhere)
-	float SuperChargeMultiplier = 2.f;
+	float SuperChargeMultiplier = 50.f;
 	UPROPERTY()
 	bool bCharging;	
 	

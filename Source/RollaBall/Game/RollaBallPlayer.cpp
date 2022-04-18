@@ -2,13 +2,9 @@
 
 
 #include "RollaBallPlayer.h"
+
 #include "GameFramework/SpringArmComponent.h"
 #include "Camera/CameraComponent.h"
-
-//test
-
-#include "GameFramework/PlayerController.h"
-
 
 // Sets default values
 ARollaBallPlayer::ARollaBallPlayer()
@@ -52,8 +48,8 @@ void ARollaBallPlayer::Tick(float DeltaTime)
 void ARollaBallPlayer::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);	
-
-	InputComponent->BindAction("Jump", IE_Pressed, this, &ARollaBallPlayer::Jump);
+	
+	
 	InputComponent->BindAction("SuperCharge", IE_Pressed, this, &ARollaBallPlayer::Charge);
 	InputComponent->BindAction("SuperCharge", IE_Released, this, &ARollaBallPlayer::Release);
 	
@@ -65,17 +61,6 @@ void ARollaBallPlayer::SetupPlayerInputComponent(UInputComponent* PlayerInputCom
 	InputComponent->BindAxis("LookRight", this, &ARollaBallPlayer::LookRight);	
 }
 
-void ARollaBallPlayer::Jump()
-{
-	if(JumpCount < MaxJumpCount)
-	{
-		const FVector Jump = Camera->GetUpVector() * JumpImpulse*(SuperCharge*SuperChargeMultiplier);
-		Mesh->AddImpulse(Jump);
-		JumpCount++;
-		bGrounded = false;
-	}	
-}
-
 void ARollaBallPlayer::Charge()
 {
 	bCharging = true;
@@ -84,11 +69,20 @@ void ARollaBallPlayer::Charge()
 
 void ARollaBallPlayer::Release()
 {
-	bCharging = false;	
-	const FVector Dash = Camera->GetForwardVector() * JumpImpulse*(SuperCharge*SuperChargeMultiplier);
+	bCharging = false;
+	float DashMultiplier = JumpImpulse * (SuperCharge * SuperChargeMultiplier);
+	const FVector Dash = Camera->GetForwardVector() * FMath::Clamp(DashMultiplier, JumpImpulse, 100000.f);
+	
 	Mesh->AddImpulse(Dash);
-	SuperCharge = 0.f;
+	
 	ChargeReleased();
+	SuperCharge = 0.f;	
+	if(DashCount < MaxDashCount)
+	{
+		
+		DashCount++;
+		bGrounded = false;
+	}
 }
 
 void ARollaBallPlayer::MoveForward(float Value)
@@ -120,9 +114,9 @@ void ARollaBallPlayer::OnHit(UPrimitiveComponent* HitComponent, AActor* OtherAct
 {
 	const float HitDirection = Hit.Normal.Z;	
 	
-	if(HitDirection > 0 && !bGrounded && JumpCount != 0)
+	if(HitDirection > 0 && !bGrounded && DashCount != 0)
 	{
-		JumpCount = 0;
+		DashCount = 0;
 		bGrounded = true;
 	}
 		
