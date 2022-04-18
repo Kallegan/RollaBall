@@ -44,7 +44,7 @@ void ARollaBallPlayer::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 	
-	if(bIsCharging)
+	if(bCharging)
 	SuperCharge+=DeltaTime;		
 }
 
@@ -69,7 +69,7 @@ void ARollaBallPlayer::Jump()
 {
 	if(JumpCount < MaxJumpCount)
 	{
-		const FVector Jump = Camera->GetUpVector() * JumpImpulse;
+		const FVector Jump = Camera->GetUpVector() * JumpImpulse*(SuperCharge*SuperChargeMultiplier);
 		Mesh->AddImpulse(Jump);
 		JumpCount++;
 		bGrounded = false;
@@ -78,14 +78,14 @@ void ARollaBallPlayer::Jump()
 
 void ARollaBallPlayer::Charge()
 {
-	bIsCharging = true;
+	bCharging = true;
 	ChargeStarted();
 }
 
 void ARollaBallPlayer::Release()
 {
-	bIsCharging = false;	
-	const FVector Dash = Camera->GetForwardVector() * JumpImpulse*SuperCharge;
+	bCharging = false;	
+	const FVector Dash = Camera->GetForwardVector() * JumpImpulse*(SuperCharge*SuperChargeMultiplier);
 	Mesh->AddImpulse(Dash);
 	SuperCharge = 0.f;
 	ChargeReleased();
@@ -105,13 +105,13 @@ void ARollaBallPlayer::MoveRight(float Value)
 
 void ARollaBallPlayer::LookUp(float AxisValue)
 {	
-	AddControllerPitchInput(AxisValue * BaseLookUpRate * GetWorld()->GetDeltaSeconds());
+	AddControllerPitchInput(AxisValue * CameraLookRate * GetWorld()->GetDeltaSeconds());
 }
 
 
 void ARollaBallPlayer::LookRight(float AxisValue)
 {	
-	AddControllerYawInput(AxisValue * BaseLookRightRate * GetWorld()->GetDeltaSeconds());
+	AddControllerYawInput(AxisValue * CameraLookRate * GetWorld()->GetDeltaSeconds());
 }
 
 

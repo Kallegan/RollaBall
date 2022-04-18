@@ -65,13 +65,13 @@ private:
 	UPROPERTY(EditDefaultsOnly)
 	int16 JumpCount = 0;	
 	UPROPERTY(EditAnywhere)
-	float BaseLookUpRate = 10.f;
-	UPROPERTY(EditAnywhere)
-	float BaseLookRightRate = 10.f; 
-	UPROPERTY(VisibleAnywhere)
-	float SuperCharge = 0.f;
+	float CameraLookRate = 20.f; 
 	UPROPERTY()
-	bool bIsCharging;	
+	float SuperCharge = 0.f;
+	UPROPERTY(VisibleAnywhere)
+	float SuperChargeMultiplier = 2.f;
+	UPROPERTY()
+	bool bCharging;	
 	
 
 public:
