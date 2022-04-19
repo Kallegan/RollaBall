@@ -3,21 +3,29 @@
 #pragma once
 
 #include "CoreMinimal.h"
+
 #include "Blueprint/UserWidget.h"
 #include "RollableWidget.generated.h"
 
+class ARollaBallPlayer;
+class UTextBlock;
+class UProgressBar;
 /**
  * 
  */
-UCLASS()
+UCLASS() //make abstract
 class ROLLABALL_API URollableWidget : public UUserWidget
 {
-	GENERATED_BODY()
+	GENERATED_BODY()	
 
-
-public:
-
-	UFUNCTION(BlueprintImplementableEvent)
-	void SetItemText(int32 ItemsCollected, int32 ItemsInLevel);
+public:	
 	
+	//adding the collect text by using event triggered by game manager.
+	UFUNCTION(BlueprintImplementableEvent)
+	void SetItemText(int ItemsCollected, int ItemsInLevel);
+	
+	void SetCurrentCharge(float CurrentCharge, float MaxCharge);	
+	
+	UPROPERTY(meta = (BindWidget))
+	UProgressBar* SuperchargeBar;		
 };

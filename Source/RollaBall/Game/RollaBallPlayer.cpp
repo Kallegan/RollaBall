@@ -2,8 +2,8 @@
 
 
 #include "RollaBallPlayer.h"
-
 #include "GameFramework/SpringArmComponent.h"
+
 #include "Camera/CameraComponent.h"
 
 // Sets default values
@@ -11,7 +11,6 @@ ARollaBallPlayer::ARollaBallPlayer()
 {
  	// Set this pawn to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
-
 	
 	Mesh = CreateDefaultSubobject<UStaticMeshComponent>("Mesh");
 	SpringArm = CreateDefaultSubobject<USpringArmComponent>("SpringArm");
@@ -24,6 +23,7 @@ ARollaBallPlayer::ARollaBallPlayer()
 	Mesh->SetSimulatePhysics(true);
 
 	Mesh->OnComponentHit.AddDynamic(this, &ARollaBallPlayer::OnHit);
+	
 }
 
 // Called when the game starts or when spawned
@@ -40,20 +40,17 @@ void ARollaBallPlayer::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 	
-	if(bCharging)
-	SuperCharge+=DeltaTime;		
+	if(bCharging && Supercharge < MaxSupercharge)
+	Supercharge+=DeltaTime;		
 }
 
-// Called to bind functionality to input
 void ARollaBallPlayer::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);	
-	
-	
+		
 	InputComponent->BindAction("SuperCharge", IE_Pressed, this, &ARollaBallPlayer::Charge);
 	InputComponent->BindAction("SuperCharge", IE_Released, this, &ARollaBallPlayer::Release);
 	
-
 	InputComponent->BindAxis("MoveForward", this, &ARollaBallPlayer::MoveForward);
 	InputComponent->BindAxis("MoveRight", this, &ARollaBallPlayer::MoveRight);
 
@@ -63,25 +60,28 @@ void ARollaBallPlayer::SetupPlayerInputComponent(UInputComponent* PlayerInputCom
 
 void ARollaBallPlayer::Charge()
 {
-	bCharging = true;
-	ChargeStarted();
+	bCharging = true;	
 }
 
 void ARollaBallPlayer::Release()
 {
 	bCharging = false;
-	float DashMultiplier = JumpImpulse * (SuperCharge * SuperChargeMultiplier);
-	const FVector Dash = Camera->GetForwardVector() * FMath::Clamp(DashMultiplier, JumpImpulse, 100000.f);
-	
-	Mesh->AddImpulse(Dash);
-	
-	ChargeReleased();
-	SuperCharge = 0.f;	
-	if(DashCount < MaxDashCount)
+	if(Supercharge > 0.2f)
 	{
-		
-		DashCount++;
-		bGrounded = false;
+		const float DashMultiplier = JumpImpulse * (1+ Supercharge * SuperchargeMultiplier);
+		const FVector Dash = Camera->GetForwardVector() * FMath::Clamp(DashMultiplier, JumpImpulse, 250000.f);
+	
+		Mesh->AddImpulse(Dash);		
+		Supercharge = 0.f;	
+		if(DashCount < MaxDashCount)
+		{		
+			DashCount++;
+			bGrounded = false;
+		}
+	}
+	else
+	{
+		Supercharge = 0;
 	}
 }
 
@@ -118,16 +118,7 @@ void ARollaBallPlayer::OnHit(UPrimitiveComponent* HitComponent, AActor* OtherAct
 	{
 		DashCount = 0;
 		bGrounded = true;
-	}
-		
-}
-
-void ARollaBallPlayer::ChargeStarted_Implementation()
-{
-}
-
-void ARollaBallPlayer::ChargeReleased_Implementation()
-{
+	}		
 }
 
 

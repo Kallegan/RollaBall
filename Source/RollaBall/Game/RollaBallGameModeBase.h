@@ -4,34 +4,49 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/GameModeBase.h"
+#include "RollaBallPlayer.h"
 #include "RollaBallGameModeBase.generated.h"
 
-class URollableWidget;
 
+class URollableWidget;
 UCLASS()
 class ROLLABALL_API ARollaBallGameModeBase : public AGameModeBase
 {
 	GENERATED_BODY()
 
+	//TEST
+public:
+	ARollaBallGameModeBase();
+	UPROPERTY()
+	ARollaBallPlayer* MyCharacter;
+
+private:
+		
+	virtual void Tick(float DeltaSeconds) override;
+	
 protected:
 
-	int32 ItemsCollected = 0;
-	int32 ItemsInLevel = 0;
+	int ItemsCollected = 0;
+	int ItemsInLevel = 0;
+
+	float CurrentSupercharge = 0;
+	float MaxSuperCharge = 0;
+	
 
 	UPROPERTY(EditAnywhere, Category= "Widgets")
 	TSubclassOf<UUserWidget> GameWidgetClass;
 
 	UPROPERTY()
 	URollableWidget* GameWidget;
-
 	
-	virtual void BeginPlay() override;
+	virtual void BeginPlay() override;	
 
 	//updates gui.
 	void UpdateItemText();
 
-
 public:
-	void ItemCollected();	
+	void ItemCollected();
+	void UpdateSupercharge();
+
 	
 };

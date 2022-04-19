@@ -10,9 +10,25 @@
   <component name="ChangeListManager">
     <list default="true" id="2fed9463-47e8-4be3-89bd-412bbdf6df6c" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.RollaBall/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.RollaBall/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Config/DefaultEditor.ini" beforeDir="false" afterPath="$PROJECT_DIR$/Config/DefaultEditor.ini" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Config/DefaultEngine.ini" beforeDir="false" afterPath="$PROJECT_DIR$/Config/DefaultEngine.ini" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Blueprints/Game/BP_GameModeBase.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprints/Game/BP_GameModeBase.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Blueprints/Game/BP_Player.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprints/Game/BP_Player.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Blueprints/Game/WBP_RollableWidget.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprints/Game/WBP_RollableWidget.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Blueprints/Items/BP_ItemBase.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprints/Items/BP_ItemBase.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/__ExternalActors__/NewMap/3/PG/YPDFTWSQ3R8YHD1YM1YPJC.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/__ExternalActors__/NewMap/6/ZX/GJXPGXUEAB935LQ2GGF9FH.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/__ExternalActors__/NewMap/7/R4/Y5IK8L7H1BCT8ZJMNKYE8B.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/__ExternalActors__/NewMap/B/CD/RMSE4RSPP134FLX7N17DYR.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/__ExternalActors__/NewMap/E/WS/J405F3D5QSFOLT3OHCQ5LB.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/__ExternalActors__/NewMap/E/WS/J405F3D5QSFOLT3OHCQ5LB.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RollaBall.uproject" beforeDir="false" afterPath="$PROJECT_DIR$/RollaBall.uproject" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/RollaBall/Game/RollaBallGameModeBase.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/RollaBall/Game/RollaBallGameModeBase.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/RollaBall/Game/RollaBallGameModeBase.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/RollaBall/Game/RollaBallGameModeBase.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Source/RollaBall/Game/RollaBallPlayer.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/RollaBall/Game/RollaBallPlayer.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Source/RollaBall/Game/RollaBallPlayer.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/RollaBall/Game/RollaBallPlayer.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/RollaBall/Game/RollableWidget.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/RollaBall/Game/RollableWidget.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/RollaBall/Game/RollableWidget.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/RollaBall/Game/RollableWidget.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/RollaBall/RollaBall.Build.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Source/RollaBall/RollaBall.Build.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -181,7 +197,8 @@
       <workItem from="1649955422267" duration="5153000" />
       <workItem from="1650130412079" duration="1319000" />
       <workItem from="1650289337221" duration="995000" />
-      <workItem from="1650293445981" duration="1877000" />
+      <workItem from="1650293445981" duration="2087000" />
+      <workItem from="1650357128925" duration="24141000" />
     </task>
     <servers />
   </component>

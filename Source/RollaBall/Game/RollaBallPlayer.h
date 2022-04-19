@@ -35,7 +35,7 @@ protected:
 	UPROPERTY(EditDefaultsOnly)
 	float MoveForce = 500.f;
 	UPROPERTY(EditDefaultsOnly)
-	float JumpImpulse = 100.f;
+	float JumpImpulse = 500.f;
 	int16 MaxDashCount = 1;
 	bool bHoldCamera = true;
 	bool bGrounded = true;
@@ -65,22 +65,19 @@ private:
 	UPROPERTY(EditAnywhere)
 	float CameraLookRate = 20.f; 
 	UPROPERTY()
-	float SuperCharge = 0.f;
-	UPROPERTY(VisibleAnywhere)
-	float SuperChargeMultiplier = 50.f;
+	float Supercharge = 0;
 	UPROPERTY()
-	bool bCharging;	
-	
+	float MaxSupercharge = 2.f;
+	UPROPERTY(EditAnywhere)
+	float SuperchargeMultiplier = 5.f;
+	UPROPERTY()
+	bool bCharging;
 
 public:
 	UFUNCTION()
 	void OnHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit );
 
-	UFUNCTION(BlueprintNativeEvent)
-	void ChargeStarted();	
-	
-	UFUNCTION(BlueprintNativeEvent)
-	void ChargeReleased();
 
-	
+	float GetCurrentSupercharge() const { return Supercharge;}
+	float GetMaxCharge() const { return MaxSupercharge;}		
 };

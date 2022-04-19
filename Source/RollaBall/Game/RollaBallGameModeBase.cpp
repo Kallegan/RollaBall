@@ -7,23 +7,42 @@
 #include "Kismet/GameplayStatics.h"
 #include "RollaBall/Items/RollaBallItemBase.h"
 
+
 void ARollaBallGameModeBase::BeginPlay()
-{	//type array of actors.
+{	
+	Super::BeginPlay();	
+
+	MyCharacter = Cast<ARollaBallPlayer>(UGameplayStatics::GetPlayerPawn(this, 0));
+	MaxSuperCharge = MyCharacter->GetMaxCharge();
+	
+	//type array of actors.
 	TArray<AActor*> Items;
 	//Gets all static items in current level that is of ARollaBallItemBase, and store them in a list of the items.
 	UGameplayStatics::GetAllActorsOfClass(GetWorld(), ARollaBallItemBase::StaticClass(), Items);
 	ItemsInLevel = Items.Num();
-
+	
+	GameWidget = Cast<URollableWidget>(CreateWidget(GetWorld(), GameWidgetClass));
+	
 	if(GameWidgetClass)
-	{
-		GameWidget = Cast<URollableWidget>(CreateWidget(GetWorld(), GameWidgetClass));
-
+	{				
 		if(GameWidget)
 		{
 			GameWidget->AddToViewport();
-			UpdateItemText();
+			UpdateItemText();			
 		}
 	}	
+}
+
+ARollaBallGameModeBase::ARollaBallGameModeBase()
+{	
+	PrimaryActorTick.bCanEverTick = true;
+	PrimaryActorTick.bStartWithTickEnabled = true;
+}
+
+void ARollaBallGameModeBase::Tick(float DeltaSeconds)
+{
+	Super::Tick(DeltaSeconds);	
+	UpdateSupercharge();	
 }
 
 void ARollaBallGameModeBase::UpdateItemText()
@@ -36,3 +55,12 @@ void ARollaBallGameModeBase::ItemCollected()
 	ItemsCollected++;
 	UpdateItemText();
 }
+
+void ARollaBallGameModeBase::UpdateSupercharge()
+{	
+	CurrentSupercharge = MyCharacter->GetCurrentSupercharge();
+	MaxSuperCharge = MyCharacter->GetMaxCharge();
+	GameWidget->SetCurrentCharge(CurrentSupercharge, MaxSuperCharge);
+}
+
+
