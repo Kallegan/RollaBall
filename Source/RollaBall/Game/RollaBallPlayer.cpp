@@ -3,7 +3,6 @@
 
 #include "RollaBallPlayer.h"
 #include "GameFramework/SpringArmComponent.h"
-
 #include "Camera/CameraComponent.h"
 
 // Sets default values
@@ -22,8 +21,7 @@ ARollaBallPlayer::ARollaBallPlayer()
 	
 	Mesh->SetSimulatePhysics(true);
 
-	Mesh->OnComponentHit.AddDynamic(this, &ARollaBallPlayer::OnHit);
-	
+	Mesh->OnComponentHit.AddDynamic(this, &ARollaBallPlayer::OnHit);	
 }
 
 // Called when the game starts or when spawned
@@ -40,7 +38,7 @@ void ARollaBallPlayer::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 	
-	if(bCharging && Supercharge < MaxSupercharge)
+	if(bCharging && Supercharge < MaxSupercharge && DashCount < MaxDashCount)
 	Supercharge+=DeltaTime;		
 }
 
