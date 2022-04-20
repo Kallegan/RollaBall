@@ -61,7 +61,7 @@ private:
 	
 
 	UPROPERTY(EditDefaultsOnly)
-	int16 DashCount = 0;	
+	int DashCount = 0;	
 	UPROPERTY(EditAnywhere)
 	float CameraLookRate = 20.f; 
 	UPROPERTY()
