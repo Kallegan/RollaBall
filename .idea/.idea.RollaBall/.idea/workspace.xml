@@ -12,7 +12,6 @@
       <change beforePath="$PROJECT_DIR$/.idea/.idea.RollaBall/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.RollaBall/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/Maps/ModelToolTestLevel.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Maps/ModelToolTestLevel.umap" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Source/RollaBall/Game/RollaBallPlayer.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/RollaBall/Game/RollaBallPlayer.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/RollaBall/Game/RollaBallPlayer.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/RollaBall/Game/RollaBallPlayer.h" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -185,7 +184,7 @@
       <workItem from="1650357128925" duration="25294000" />
       <workItem from="1650467540897" duration="4139000" />
       <workItem from="1650484966812" duration="1227000" />
-      <workItem from="1650539624547" duration="6072000" />
+      <workItem from="1650539624547" duration="7918000" />
     </task>
     <servers />
   </component>

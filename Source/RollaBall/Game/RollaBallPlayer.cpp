@@ -17,11 +17,13 @@ ARollaBallPlayer::ARollaBallPlayer()
 	
 	RootComponent = Mesh;	
 	SpringArm->SetupAttachment(Mesh);
-	Camera->SetupAttachment(SpringArm);
+	Camera->SetupAttachment(SpringArm);	
 	
 	Mesh->SetSimulatePhysics(true);
+	
+	Mesh->OnComponentHit.AddDynamic(this, &ARollaBallPlayer::OnHit);
 
-	Mesh->OnComponentHit.AddDynamic(this, &ARollaBallPlayer::OnHit);	
+	
 }
 
 // Called when the game starts or when spawned
@@ -29,23 +31,25 @@ void ARollaBallPlayer::BeginPlay()
 {
 	Super::BeginPlay();
 
-	JumpImpulse *= Mesh->GetMass();
-	MoveForce *= Mesh->GetMass();	
+	
+	//added a multiplier to reduce the total needed to see an effect when tuning stuff.
+	JumpImpulse *= 100.f;
+	MoveForce *=100.f;	
 }
 
 // Called every frame
 void ARollaBallPlayer::Tick(float DeltaTime)
 {
-	Super::Tick(DeltaTime);
+	Super::Tick(DeltaTime);	
 	
 	if(bCharging && Supercharge < MaxSupercharge && DashCount < MaxDashCount)
-	Supercharge+=DeltaTime;		
+	Supercharge+=DeltaTime;	
 }
 
 void ARollaBallPlayer::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);	
-		
+	
 	InputComponent->BindAction("SuperCharge", IE_Pressed, this, &ARollaBallPlayer::Charge);
 	InputComponent->BindAction("SuperCharge", IE_Released, this, &ARollaBallPlayer::Release);
 
@@ -87,7 +91,7 @@ void ARollaBallPlayer::Release()
 }
 
 void ARollaBallPlayer::Jump()
-{
+{		
 	if(Supercharge > 0.2f)
 	{
 		const float ChargeForce = JumpImpulse * ((1+Supercharge) * SuperchargeMultiplier);
@@ -123,12 +127,30 @@ void ARollaBallPlayer::MoveForward(float Value)
 {
 	const FVector Forward = Camera->GetForwardVector() * MoveForce * Value;
 	Mesh->AddForce(Forward);
+
+	GEngine->AddOnScreenDebugMessage(
+	INDEX_NONE,
+	0.f,
+	FColor::Red,
+	FString::Printf(TEXT("Moving forward: %f"), MoveForce)	
+	);
+	
 }
 
 void ARollaBallPlayer::MoveRight(float Value)
 {
+	if(MoveForce < 1)
+		MoveForce *= Mesh->GetMass();
+			
 	const FVector Right = Camera->GetRightVector() * MoveForce * Value;
 	Mesh->AddForce(Right);
+	
+	GEngine->AddOnScreenDebugMessage(
+	INDEX_NONE,
+	0.f,
+	FColor::Black,
+	FString::Printf(TEXT("Moving right: %f"), MoveForce)	
+	);
 }
 
 void ARollaBallPlayer::LookUp(float AxisValue)
