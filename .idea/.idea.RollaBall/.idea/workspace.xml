@@ -10,7 +10,6 @@
   <component name="ChangeListManager">
     <list default="true" id="2fed9463-47e8-4be3-89bd-412bbdf6df6c" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.RollaBall/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.RollaBall/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Blueprints/Game/BP_Player.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprints/Game/BP_Player.uasset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/Maps/ModelToolTestLevel.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Maps/ModelToolTestLevel.umap" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Source/RollaBall/Game/RollaBallPlayer.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/RollaBall/Game/RollaBallPlayer.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Source/RollaBall/Game/RollaBallPlayer.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/RollaBall/Game/RollaBallPlayer.h" afterDir="false" />
@@ -186,7 +185,7 @@
       <workItem from="1650357128925" duration="25294000" />
       <workItem from="1650467540897" duration="4139000" />
       <workItem from="1650484966812" duration="1227000" />
-      <workItem from="1650539624547" duration="11134000" />
+      <workItem from="1650539624547" duration="13505000" />
     </task>
     <servers />
   </component>

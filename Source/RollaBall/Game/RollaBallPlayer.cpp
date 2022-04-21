@@ -74,8 +74,9 @@ void ARollaBallPlayer::Release()
 	if(Supercharge > 0.2f)
 	{
 		const float DashMultiplier = JumpImpulse * (1+ Supercharge * SuperchargeMultiplier);
-		const FVector Dash = Camera->GetForwardVector() * DashMultiplier;
-	
+		
+		const FVector Dash = Camera->GetForwardVector() * DashMultiplier;		
+		
 		Mesh->AddImpulse(Dash);		
 		Supercharge = 0.f;	
 		if(DashCount < MaxDashCount)
@@ -94,7 +95,7 @@ void ARollaBallPlayer::Jump()
 {		
 	if(Supercharge > 0.2f)
 	{
-		const float ChargeForce = JumpImpulse * ((1+Supercharge) * SuperchargeMultiplier);
+		const float ChargeForce = JumpImpulse * (1+Supercharge);
 		const FVector Jump = GetActorLocation().UpVector * FMath::Clamp(ChargeForce, JumpImpulse, 200000.f);
 	
 		Mesh->AddImpulse(Jump);				
@@ -126,15 +127,7 @@ void ARollaBallPlayer::AirSlam()
 void ARollaBallPlayer::MoveForward(float Value)
 {
 	const FVector Forward = Camera->GetForwardVector() * MoveForce * Value;
-	Mesh->AddForce(Forward);
-
-	GEngine->AddOnScreenDebugMessage(
-	INDEX_NONE,
-	0.f,
-	FColor::Red,
-	FString::Printf(TEXT("Moving forward: %f"), MoveForce)	
-	);
-	
+	Mesh->AddForce(Forward);	
 }
 
 void ARollaBallPlayer::MoveRight(float Value)
@@ -143,14 +136,7 @@ void ARollaBallPlayer::MoveRight(float Value)
 		MoveForce *= Mesh->GetMass();
 			
 	const FVector Right = Camera->GetRightVector() * MoveForce * Value;
-	Mesh->AddForce(Right);
-	
-	GEngine->AddOnScreenDebugMessage(
-	INDEX_NONE,
-	0.f,
-	FColor::Black,
-	FString::Printf(TEXT("Moving right: %f"), MoveForce)	
-	);
+	Mesh->AddForce(Right);	
 }
 
 void ARollaBallPlayer::LookUp(float AxisValue)

@@ -36,7 +36,7 @@ protected:
 	float MoveForce = 500.f;
 	UPROPERTY(EditDefaultsOnly)
 	float JumpImpulse = 500.f;
-
+	
 	
 	int MaxDashCount = 1;
 	bool bHoldCamera = true;
@@ -64,16 +64,20 @@ private:
 	UPROPERTY(EditDefaultsOnly)
 	int DashCount = 0;	
 	UPROPERTY(EditAnywhere)
-	float CameraLookRate = 20.f; 
+	float CameraLookRate = 20.f;
+	UPROPERTY(EditAnywhere)
+	float SuperchargeMultiplier = 2.f;
+	
+
+	
 	UPROPERTY()
 	float Supercharge = 0;
 	UPROPERTY()
-	float MaxSupercharge = 2.f;
-	UPROPERTY(EditAnywhere)
-	float SuperchargeMultiplier = 2.f;
+	float MaxSupercharge = 2.f;	
 	float SlamForce = 5.f;
 	UPROPERTY()
-	bool bCharging;	
+	bool bCharging;
+
 
 public:
 	UFUNCTION()
