@@ -74,7 +74,7 @@ void ARollaBallPlayer::Release()
 	if(Supercharge > 0.2f)
 	{
 		const float DashMultiplier = JumpImpulse * (1+ Supercharge * SuperchargeMultiplier);
-		const FVector Dash = Camera->GetForwardVector() * FMath::Clamp(DashMultiplier, JumpImpulse, 250000.f);
+		const FVector Dash = Camera->GetForwardVector() * DashMultiplier;
 	
 		Mesh->AddImpulse(Dash);		
 		Supercharge = 0.f;	
@@ -171,7 +171,7 @@ void ARollaBallPlayer::OnHit(UPrimitiveComponent* HitComponent, AActor* OtherAct
 	const float HitDirection = Hit.Normal.Z;	
 
 	//checks if hit is below to reset dash/ground check.
-	if(HitDirection > 0 && !bGrounded && DashCount != 0)
+	if(HitDirection > 0 && !bGrounded)
 	{
 		DashCount = 0;
 		bGrounded = true;

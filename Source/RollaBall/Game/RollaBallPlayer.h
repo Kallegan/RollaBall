@@ -41,9 +41,6 @@ protected:
 	int MaxDashCount = 1;
 	bool bHoldCamera = true;
 	bool bGrounded = true;
-
-	//UPROPERTY()
-	//APlayerController* MouseCameraLock;
 	
 public:	
 	// Called every frame
