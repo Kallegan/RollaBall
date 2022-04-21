@@ -50,6 +50,7 @@ void ARollaBallPlayer::SetupPlayerInputComponent(UInputComponent* PlayerInputCom
 	InputComponent->BindAction("SuperCharge", IE_Released, this, &ARollaBallPlayer::Release);
 
 	InputComponent->BindAction("Jump", IE_Pressed, this, &ARollaBallPlayer::Jump);
+	InputComponent->BindAction("Slam", IE_Pressed, this, &ARollaBallPlayer::AirSlam);
 	
 	InputComponent->BindAxis("MoveForward", this, &ARollaBallPlayer::MoveForward);
 	InputComponent->BindAxis("MoveRight", this, &ARollaBallPlayer::MoveRight);
@@ -89,8 +90,8 @@ void ARollaBallPlayer::Jump()
 {
 	if(Supercharge > 0.2f)
 	{
-		const float DashMultiplier = JumpImpulse * (1+ Supercharge * SuperchargeMultiplier);
-		const FVector Jump = GetActorLocation().UpVector * FMath::Clamp(DashMultiplier, JumpImpulse, 250000.f);
+		const float ChargeMultiplier = JumpImpulse * 1+ (Supercharge * SuperchargeMultiplier);
+		const FVector Jump = GetActorLocation().UpVector * FMath::Clamp(ChargeMultiplier, JumpImpulse, 250000.f);
 	
 		Mesh->AddImpulse(Jump);		
 		Supercharge = 0.f;	
@@ -104,6 +105,14 @@ void ARollaBallPlayer::Jump()
 	{
 		Supercharge = 0;
 	}
+}
+
+void ARollaBallPlayer::AirSlam()
+{
+	Mesh->SetSimulatePhysics(false);	
+	const FVector Slam = GetActorLocation().DownVector * SlamForce * JumpImpulse;
+	Mesh->SetSimulatePhysics(true);
+	Mesh->AddImpulse(Slam);	
 }
 
 void ARollaBallPlayer::MoveForward(float Value)

@@ -55,6 +55,7 @@ private:
 	void Charge();
 	void Release();
 	void Jump();
+	void AirSlam();
 	void MoveForward(float Value);	
 	void MoveRight(float Value);
 	void LookUp(float AxisValue);
@@ -71,6 +72,7 @@ private:
 	float MaxSupercharge = 2.f;
 	UPROPERTY(EditAnywhere)
 	float SuperchargeMultiplier = 5.f;
+	float SlamForce = 5.f;
 	UPROPERTY()
 	bool bCharging;
 
