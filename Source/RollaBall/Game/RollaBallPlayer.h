@@ -25,7 +25,7 @@ protected:
 	
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components")
 	UStaticMeshComponent* Mesh;
-
+	
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components")
 	USpringArmComponent* SpringArm;
 	
@@ -36,12 +36,14 @@ protected:
 	float MoveForce = 500.f;
 	UPROPERTY(EditDefaultsOnly)
 	float JumpImpulse = 500.f;
-	int16 MaxDashCount = 1;
+
+	
+	int MaxDashCount = 1;
 	bool bHoldCamera = true;
 	bool bGrounded = true;
 
-	UPROPERTY()
-	APlayerController* MouseCameraLock;
+	//UPROPERTY()
+	//APlayerController* MouseCameraLock;
 	
 public:	
 	// Called every frame

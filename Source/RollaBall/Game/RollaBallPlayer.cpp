@@ -169,7 +169,8 @@ void ARollaBallPlayer::OnHit(UPrimitiveComponent* HitComponent, AActor* OtherAct
                              UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit)
 {
 	const float HitDirection = Hit.Normal.Z;	
-	
+
+	//checks if hit is below to reset dash/ground check.
 	if(HitDirection > 0 && !bGrounded && DashCount != 0)
 	{
 		DashCount = 0;
