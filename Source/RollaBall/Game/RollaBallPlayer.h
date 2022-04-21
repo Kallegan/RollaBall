@@ -54,6 +54,7 @@ private:
 	
 	void Charge();
 	void Release();
+	void Jump();
 	void MoveForward(float Value);	
 	void MoveRight(float Value);
 	void LookUp(float AxisValue);

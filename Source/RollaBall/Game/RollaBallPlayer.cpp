@@ -48,6 +48,8 @@ void ARollaBallPlayer::SetupPlayerInputComponent(UInputComponent* PlayerInputCom
 		
 	InputComponent->BindAction("SuperCharge", IE_Pressed, this, &ARollaBallPlayer::Charge);
 	InputComponent->BindAction("SuperCharge", IE_Released, this, &ARollaBallPlayer::Release);
+
+	InputComponent->BindAction("Jump", IE_Pressed, this, &ARollaBallPlayer::Jump);
 	
 	InputComponent->BindAxis("MoveForward", this, &ARollaBallPlayer::MoveForward);
 	InputComponent->BindAxis("MoveRight", this, &ARollaBallPlayer::MoveRight);
@@ -70,6 +72,27 @@ void ARollaBallPlayer::Release()
 		const FVector Dash = Camera->GetForwardVector() * FMath::Clamp(DashMultiplier, JumpImpulse, 250000.f);
 	
 		Mesh->AddImpulse(Dash);		
+		Supercharge = 0.f;	
+		if(DashCount < MaxDashCount)
+		{		
+			DashCount++;
+			bGrounded = false;
+		}
+	}
+	else
+	{
+		Supercharge = 0;
+	}
+}
+
+void ARollaBallPlayer::Jump()
+{
+	if(Supercharge > 0.2f)
+	{
+		const float DashMultiplier = JumpImpulse * (1+ Supercharge * SuperchargeMultiplier);
+		const FVector Jump = GetActorLocation().UpVector * FMath::Clamp(DashMultiplier, JumpImpulse, 250000.f);
+	
+		Mesh->AddImpulse(Jump);		
 		Supercharge = 0.f;	
 		if(DashCount < MaxDashCount)
 		{		
