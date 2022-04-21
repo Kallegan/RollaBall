@@ -94,25 +94,30 @@ void ARollaBallPlayer::Jump()
 		const FVector Jump = GetActorLocation().UpVector * FMath::Clamp(ChargeMultiplier, JumpImpulse, 250000.f);
 	
 		Mesh->AddImpulse(Jump);		
-		Supercharge = 0.f;	
-		if(DashCount < MaxDashCount)
-		{		
-			DashCount++;
-			bGrounded = false;
-		}
+		Supercharge = 0.f;		
 	}
 	else
 	{
-		Supercharge = 0;
+		const FVector Jump = GetActorLocation().UpVector * JumpImpulse;
+		Mesh->AddImpulse(Jump);					
+	}
+
+	if(DashCount < MaxDashCount)
+	{		
+		DashCount++;
+		bGrounded = false;
 	}
 }
 
 void ARollaBallPlayer::AirSlam()
 {
-	Mesh->SetSimulatePhysics(false);	
-	const FVector Slam = GetActorLocation().DownVector * SlamForce * JumpImpulse;
-	Mesh->SetSimulatePhysics(true);
-	Mesh->AddImpulse(Slam);	
+	if(!bGrounded)
+	{
+		Mesh->SetSimulatePhysics(false);	
+		const FVector Slam = GetActorLocation().DownVector * SlamForce * JumpImpulse;
+		Mesh->SetSimulatePhysics(true);
+		Mesh->AddImpulse(Slam);	
+	}
 }
 
 void ARollaBallPlayer::MoveForward(float Value)
