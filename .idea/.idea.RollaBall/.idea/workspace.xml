@@ -9,10 +9,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2fed9463-47e8-4be3-89bd-412bbdf6df6c" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/Content/Blueprints/Game/BP_GameModeBase.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprints/Game/BP_GameModeBase.uasset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/Blueprints/Game/BP_Player.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprints/Game/BP_Player.uasset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/Maps/ModelToolTestLevel.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Maps/ModelToolTestLevel.umap" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Maps/_GENERATED/karlberglund/CubeGridToolOutput_AD14C335.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Maps/_GENERATED/karlberglund/CubeGridToolOutput_AD14C335.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/_GENERATED/karlberglund/CubeGridToolOutput_91E0AC08.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/_GENERATED/karlberglund/CubeGridToolOutput_91E0AC08.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Maps/_GENERATED/karlberglund/CubeGridToolOutput_0270F946.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Maps/_GENERATED/karlberglund/CubeGridToolOutput_0270F946.uasset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -184,7 +184,7 @@
       <workItem from="1650293445981" duration="2087000" />
       <workItem from="1650357128925" duration="25294000" />
       <workItem from="1650467540897" duration="4139000" />
-      <workItem from="1650484966812" duration="602000" />
+      <workItem from="1650484966812" duration="1227000" />
     </task>
     <servers />
   </component>
