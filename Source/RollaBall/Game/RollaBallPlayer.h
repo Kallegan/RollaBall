@@ -71,10 +71,10 @@ private:
 	UPROPERTY()
 	float MaxSupercharge = 2.f;
 	UPROPERTY(EditAnywhere)
-	float SuperchargeMultiplier = 5.f;
+	float SuperchargeMultiplier = 2.f;
 	float SlamForce = 5.f;
 	UPROPERTY()
-	bool bCharging;
+	bool bCharging;	
 
 public:
 	UFUNCTION()

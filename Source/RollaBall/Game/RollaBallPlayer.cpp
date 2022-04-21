@@ -90,23 +90,22 @@ void ARollaBallPlayer::Jump()
 {
 	if(Supercharge > 0.2f)
 	{
-		const float ChargeMultiplier = JumpImpulse * 1+ (Supercharge * SuperchargeMultiplier);
-		const FVector Jump = GetActorLocation().UpVector * FMath::Clamp(ChargeMultiplier, JumpImpulse, 250000.f);
+		const float ChargeForce = JumpImpulse * ((1+Supercharge) * SuperchargeMultiplier);
+		const FVector Jump = GetActorLocation().UpVector * FMath::Clamp(ChargeForce, JumpImpulse, 200000.f);
 	
-		Mesh->AddImpulse(Jump);		
-		Supercharge = 0.f;		
+		Mesh->AddImpulse(Jump);				
 	}
-	else
+	else if(DashCount < MaxDashCount)
 	{
 		const FVector Jump = GetActorLocation().UpVector * JumpImpulse;
-		Mesh->AddImpulse(Jump);					
+		Mesh->AddImpulse(Jump);				
 	}
-
-	if(DashCount < MaxDashCount)
-	{		
-		DashCount++;
-		bGrounded = false;
-	}
+	else
+		return;
+	
+	DashCount++;
+	bGrounded = false;
+	Supercharge = 0.f;	
 }
 
 void ARollaBallPlayer::AirSlam()
