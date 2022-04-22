@@ -24,17 +24,17 @@ ARollaBallPlayer::ARollaBallPlayer()
 	Mesh->OnComponentHit.AddDynamic(this, &ARollaBallPlayer::OnHit);
 
 	
-}
+}	
 
 // Called when the game starts or when spawned
 void ARollaBallPlayer::BeginPlay()
 {
 	Super::BeginPlay();
-
 	
 	//added a multiplier to reduce the total needed to see an effect when tuning stuff.
-	JumpImpulse *= 100.f;
-	MoveForce *=100.f;	
+	JumpImpulse *= 75.f;
+	MoveForce *=75.f;
+	PlayerSpawn = GetController()->GetPawn()->GetActorLocation();
 }
 
 // Called every frame
@@ -55,6 +55,8 @@ void ARollaBallPlayer::SetupPlayerInputComponent(UInputComponent* PlayerInputCom
 
 	InputComponent->BindAction("Jump", IE_Pressed, this, &ARollaBallPlayer::Jump);
 	InputComponent->BindAction("Slam", IE_Pressed, this, &ARollaBallPlayer::AirSlam);
+	
+	InputComponent->BindAction("Restart", IE_Pressed, this, &ARollaBallPlayer::ResetPosition);
 	
 	InputComponent->BindAxis("MoveForward", this, &ARollaBallPlayer::MoveForward);
 	InputComponent->BindAxis("MoveRight", this, &ARollaBallPlayer::MoveRight);
@@ -102,7 +104,7 @@ void ARollaBallPlayer::Jump()
 	}
 	else if(DashCount < MaxDashCount)
 	{
-		const FVector Jump = GetActorLocation().UpVector * JumpImpulse;
+		const FVector Jump = GetActorLocation().UpVector * JumpImpulse*2;
 		Mesh->AddImpulse(Jump);				
 	}
 	else
@@ -115,13 +117,20 @@ void ARollaBallPlayer::Jump()
 
 void ARollaBallPlayer::AirSlam()
 {
-	if(!bGrounded)
+	if(!bSlammed)
 	{
 		Mesh->SetSimulatePhysics(false);	
 		const FVector Slam = GetActorLocation().DownVector * SlamForce * JumpImpulse;
 		Mesh->SetSimulatePhysics(true);
-		Mesh->AddImpulse(Slam);	
+		Mesh->AddImpulse(Slam);
+		bSlammed = true;
 	}
+	Supercharge = 0;
+}
+
+void ARollaBallPlayer::ResetPosition()
+{
+	GetController()->GetPawn()->SetActorLocation(PlayerSpawn);
 }
 
 void ARollaBallPlayer::MoveForward(float Value)
@@ -131,10 +140,7 @@ void ARollaBallPlayer::MoveForward(float Value)
 }
 
 void ARollaBallPlayer::MoveRight(float Value)
-{
-	if(MoveForce < 1)
-		MoveForce *= Mesh->GetMass();
-			
+{				
 	const FVector Right = Camera->GetRightVector() * MoveForce * Value;
 	Mesh->AddForce(Right);	
 }
@@ -154,14 +160,20 @@ void ARollaBallPlayer::LookRight(float AxisValue)
 void ARollaBallPlayer::OnHit(UPrimitiveComponent* HitComponent, AActor* OtherActor,
                              UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit)
 {
-	const float HitDirection = Hit.Normal.Z;	
-
-	//checks if hit is below to reset dash/ground check.
-	if(HitDirection > 0 && !bGrounded)
+	if(!bGrounded)
 	{
-		DashCount = 0;
-		bGrounded = true;
-	}		
+		const float HitDirection = Hit.Normal.Z;	
+
+		//checks if hit is below to reset dash/ground check.
+		if(HitDirection > 0)
+		{
+			DashCount = 0;
+			bGrounded = true;
+			bSlammed = false;
+		}		
+	}
+	
 }
+	
 
 

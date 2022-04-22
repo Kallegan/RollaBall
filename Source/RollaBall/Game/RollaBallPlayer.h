@@ -32,15 +32,7 @@ protected:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components")
 	UCameraComponent* Camera;	
 
-	UPROPERTY(EditDefaultsOnly)
-	float MoveForce = 500.f;
-	UPROPERTY(EditDefaultsOnly)
-	float JumpImpulse = 500.f;
 	
-	
-	int MaxDashCount = 1;
-	bool bHoldCamera = true;
-	bool bGrounded = true;
 	
 public:	
 	// Called every frame
@@ -55,34 +47,36 @@ private:
 	void Release();
 	void Jump();
 	void AirSlam();
+	void ResetPosition();
 	void MoveForward(float Value);	
 	void MoveRight(float Value);
 	void LookUp(float AxisValue);
 	void LookRight(float AxisValue);
-	
 
 	UPROPERTY(EditDefaultsOnly)
-	int DashCount = 0;	
-	UPROPERTY(EditAnywhere)
+	float MoveForce = 500.f;
+	UPROPERTY(EditDefaultsOnly)
+	float JumpImpulse = 500.f;		
+	UPROPERTY(EditDefaultsOnly)
 	float CameraLookRate = 20.f;
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditDefaultsOnly)
 	float SuperchargeMultiplier = 2.f;
-	
 
-	
-	UPROPERTY()
-	float Supercharge = 0;
-	UPROPERTY()
-	float MaxSupercharge = 2.f;	
+	float Supercharge = 0;	
+	float MaxSupercharge = 2.f;
 	float SlamForce = 5.f;
-	UPROPERTY()
-	bool bCharging;
+	
+	int MaxDashCount = 1;	
+	int DashCount = 0;			
+	bool bCharging = false;	
+	bool bSlammed = false;
+	bool bGrounded = true;
 
-
+	FVector PlayerSpawn{};
+	
 public:
 	UFUNCTION()
 	void OnHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit );
-
 
 	float GetCurrentSupercharge() const { return Supercharge;}
 	float GetMaxCharge() const { return MaxSupercharge;}		
