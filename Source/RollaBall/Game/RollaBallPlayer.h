@@ -72,7 +72,7 @@ private:
 	bool bSlammed = false;
 	bool bGrounded = true;
 
-	FVector PlayerSpawn{};
+	FVector PlayerSpawnLocation{};	
 	
 public:
 	UFUNCTION()
