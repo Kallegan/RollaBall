@@ -119,12 +119,13 @@ void ARollaBallPlayer::AirSlam()
 {
 	if(!bSlammed)
 	{
-		Mesh->SetSimulatePhysics(false);	
+		Mesh->SetSimulatePhysics(false);		
 		const FVector Slam = GetActorLocation().DownVector * SlamForce * JumpImpulse;
 		Mesh->SetSimulatePhysics(true);
 		Mesh->AddImpulse(Slam);
 		bSlammed = true;
 	}
+	
 	Supercharge = 0;
 }
 
@@ -167,12 +168,13 @@ void ARollaBallPlayer::OnHit(UPrimitiveComponent* HitComponent, AActor* OtherAct
 		const float HitDirection = Hit.Normal.Z;	
 
 		//checks if hit is below to reset dash/ground check.
-		if(HitDirection > 0.2)
+		if(HitDirection > 0)
 		{
 			DashCount = 0;
 			bGrounded = true;			
 		}		
 	}
+	if(bSlammed == true)
 	bSlammed = false;	
 }
 	
