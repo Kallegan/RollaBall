@@ -56,7 +56,7 @@ private:
 	UPROPERTY(EditDefaultsOnly)
 	float MoveForce = 500.f;
 	UPROPERTY(EditDefaultsOnly)
-	float JumpImpulse = 500.f;		
+	float JumpImpulse = 300.f;		
 	UPROPERTY(EditDefaultsOnly)
 	float CameraLookRate = 20.f;
 	UPROPERTY(EditDefaultsOnly)
