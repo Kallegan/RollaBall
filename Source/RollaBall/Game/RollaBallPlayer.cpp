@@ -170,11 +170,10 @@ void ARollaBallPlayer::OnHit(UPrimitiveComponent* HitComponent, AActor* OtherAct
 		if(HitDirection > 0.2)
 		{
 			DashCount = 0;
-			bGrounded = true;
-			bSlammed = false;
+			bGrounded = true;			
 		}		
 	}
-	
+	bSlammed = false;	
 }
 	
 
