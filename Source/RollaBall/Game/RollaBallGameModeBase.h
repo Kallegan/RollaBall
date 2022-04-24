@@ -14,11 +14,15 @@ class ROLLABALL_API ARollaBallGameModeBase : public AGameModeBase
 {
 	GENERATED_BODY()
 
-	//TEST
+	
 public:
 	ARollaBallGameModeBase();
+	
 	UPROPERTY()
 	ARollaBallPlayer* MyCharacter;
+
+	UPROPERTY(EditDefaultsOnly)
+	int ResetCount = 3;
 
 private:
 		
@@ -28,7 +32,7 @@ protected:
 
 	int ItemsCollected = 0;
 	int ItemsInLevel = 0;
-
+	
 	float CurrentSupercharge = 0;
 	float MaxSuperCharge = 0;
 	
@@ -47,6 +51,6 @@ protected:
 public:
 	void ItemCollected();
 	void UpdateSupercharge();
-
+	void PlayerResetPosition();
 	
 };

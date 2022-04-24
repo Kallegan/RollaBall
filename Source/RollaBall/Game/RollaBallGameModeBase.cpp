@@ -28,7 +28,8 @@ void ARollaBallGameModeBase::BeginPlay()
 		if(GameWidget)
 		{
 			GameWidget->AddToViewport();
-			UpdateItemText();			
+			UpdateItemText();
+			GameWidget->SetPlayerResetRemaning(ResetCount);
 		}
 	}	
 }
@@ -61,6 +62,15 @@ void ARollaBallGameModeBase::UpdateSupercharge()
 	CurrentSupercharge = MyCharacter->GetCurrentSupercharge();
 	MaxSuperCharge = MyCharacter->GetMaxCharge();
 	GameWidget->SetCurrentCharge(CurrentSupercharge, MaxSuperCharge);
+}
+
+void ARollaBallGameModeBase::PlayerResetPosition()
+{
+	if(ResetCount > 0)
+	{
+		ResetCount--;
+		GameWidget->SetPlayerResetRemaning(ResetCount);
+	}	
 }
 
 

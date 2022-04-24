@@ -2,12 +2,11 @@
 
 
 #include "RollaBallItemBase.h"
-
 #include "RollaBall/Game/RollaBallGameModeBase.h"
 #include "RollaBall/Game/RollaBallPlayer.h"
 
 
-class ARollaBallGameModeBase;
+
 // Sets default values
 ARollaBallItemBase::ARollaBallItemBase()
 {

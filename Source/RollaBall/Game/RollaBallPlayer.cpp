@@ -3,6 +3,7 @@
 
 #include "RollaBallPlayer.h"
 #include "GameFramework/SpringArmComponent.h"
+#include "RollaBall/Game/RollaBallGameModeBase.h"
 #include "Camera/CameraComponent.h"
 
 // Sets default values
@@ -133,7 +134,13 @@ void ARollaBallPlayer::ResetPosition()
 {
 	Mesh->SetSimulatePhysics(false);	
 	GetController()->GetPawn()->SetActorLocation(PlayerSpawnLocation);	
-	Mesh->SetSimulatePhysics(true);	
+	Mesh->SetSimulatePhysics(true);
+
+	if(ARollaBallGameModeBase* GameMode = Cast<ARollaBallGameModeBase>(GetWorld()->GetAuthGameMode()))
+	{
+		GameMode->PlayerResetPosition();
+	}
+	
 }
 
 void ARollaBallPlayer::MoveForward(float Value)
@@ -177,6 +184,3 @@ void ARollaBallPlayer::OnHit(UPrimitiveComponent* HitComponent, AActor* OtherAct
 	if(bSlammed == true)
 	bSlammed = false;	
 }
-	
-
-

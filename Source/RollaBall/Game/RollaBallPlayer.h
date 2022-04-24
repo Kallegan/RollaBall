@@ -60,24 +60,23 @@ private:
 	UPROPERTY(EditDefaultsOnly)
 	float CameraLookRate = 20.f;
 	UPROPERTY(EditDefaultsOnly)
-	float SuperchargeMultiplier = 2.f;
-
+	float SuperchargeMultiplier = 2.f;	
+	
 	float Supercharge = 0;	
 	float MaxSupercharge = 2.f;
-	float SlamForce = 5.f;
-	
+	float SlamForce = 5.f;	
 	int MaxDashCount = 1;	
-	int DashCount = 0;			
+	int DashCount = 0;	
 	bool bCharging = false;	
 	bool bSlammed = false;
 	bool bGrounded = true;
 
-	FVector PlayerSpawnLocation{};	
-	
-public:
+	FVector PlayerSpawnLocation{};
+
 	UFUNCTION()
 	void OnHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit );
-
+	
+public:
 	float GetCurrentSupercharge() const { return Supercharge;}
 	float GetMaxCharge() const { return MaxSupercharge;}		
 };
