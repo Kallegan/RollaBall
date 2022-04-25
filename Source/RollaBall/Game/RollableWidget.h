@@ -23,6 +23,8 @@ public:
 	//adding the collect text by using event triggered by game manager.
 	UFUNCTION(BlueprintImplementableEvent)
 	void SetItemText(int ItemsCollected, int ItemsInLevel);
+	UFUNCTION(BlueprintImplementableEvent)
+	void SetScoreText(int CoinScore);
 
 	UFUNCTION(BlueprintImplementableEvent)
 	void SetPlayerResetRemaning(int ResetRemaining);

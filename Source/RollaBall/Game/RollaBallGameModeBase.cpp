@@ -49,13 +49,21 @@ void ARollaBallGameModeBase::Tick(float DeltaSeconds)
 void ARollaBallGameModeBase::UpdateItemText()
 {
 	GameWidget->SetItemText(ItemsCollected, ItemsInLevel);
+	GameWidget->SetScoreText(CoinScore);	
 }
 
 void ARollaBallGameModeBase::ItemCollected()
-{
-	ItemsCollected++;
+{	
+	ItemsCollected++;	
 	UpdateItemText();
 }
+
+void ARollaBallGameModeBase::CoinCollected()
+{
+	CoinScore+=100;
+	UpdateItemText();
+}
+
 
 void ARollaBallGameModeBase::UpdateSupercharge()
 {	

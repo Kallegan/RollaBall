@@ -32,6 +32,8 @@ protected:
 
 	int ItemsCollected = 0;
 	int ItemsInLevel = 0;
+	int CoinScore = 0;
+	
 	
 	float CurrentSupercharge = 0;
 	float MaxSuperCharge = 0;
@@ -50,6 +52,7 @@ protected:
 
 public:
 	void ItemCollected();
+	void CoinCollected();
 	void UpdateSupercharge();
 	void PlayerResetPosition();
 	
