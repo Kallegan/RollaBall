@@ -30,6 +30,7 @@ void ARollaBallGameModeBase::BeginPlay()
 			GameWidget->AddToViewport();
 			UpdateItemText();
 			GameWidget->SetPlayerResetRemaning(ResetCount);
+			GameWidget->SetScoreText(CoinScore);	
 		}
 	}	
 }
@@ -48,8 +49,7 @@ void ARollaBallGameModeBase::Tick(float DeltaSeconds)
 
 void ARollaBallGameModeBase::UpdateItemText()
 {
-	GameWidget->SetItemText(ItemsCollected, ItemsInLevel);
-	GameWidget->SetScoreText(CoinScore);	
+	GameWidget->SetItemText(ItemsCollected, ItemsInLevel);	
 }
 
 void ARollaBallGameModeBase::ItemCollected()
@@ -61,7 +61,7 @@ void ARollaBallGameModeBase::ItemCollected()
 void ARollaBallGameModeBase::CoinCollected()
 {
 	CoinScore+=100;
-	UpdateItemText();
+	GameWidget->SetScoreText(CoinScore);	
 }
 
 
