@@ -56,6 +56,8 @@ void ARollaBallGameModeBase::ItemCollected()
 {	
 	ItemsCollected++;	
 	UpdateItemText();
+	if(ItemsCollected >= ItemsInLevel)	
+		MyCharacter->Destroy();	
 }
 
 void ARollaBallGameModeBase::CoinCollected()
@@ -76,10 +78,8 @@ void ARollaBallGameModeBase::PlayerResetPosition()
 {
 	ResetCount--;
 	GameWidget->SetPlayerResetRemaning(ResetCount);
-	if(ResetCount < 0)
-	{
-		MyCharacter->Destroy();
-	}	
+	if(ResetCount < 0)	
+		MyCharacter->Destroy();	
 }
 
 
