@@ -4,6 +4,8 @@
 #include "GameFramework/Actor.h"
 #include "RollaBallScoreBase.generated.h"
 
+class USphereComponent;
+
 UCLASS()
 class ARollaBallScoreBase : public AActor
 {
@@ -11,6 +13,9 @@ class ARollaBallScoreBase : public AActor
 public:
 	ARollaBallScoreBase();
 
+	UPROPERTY(EditInstanceOnly, BlueprintReadOnly, Category = "Components")
+	USphereComponent* Sphere;
+	
 	UPROPERTY(EditInstanceOnly, BlueprintReadOnly, Category = "Components")
 	UStaticMeshComponent* Mesh;
 

@@ -1,14 +1,19 @@
 ﻿#include "RollaBallScoreBase.h"
 #include "RollaBall/Game/RollaBallGameModeBase.h"
+#include "Components/SphereComponent.h"
 #include "RollaBall/Game/RollaBallPlayer.h"
 
 // Sets default values
 ARollaBallScoreBase::ARollaBallScoreBase()
 {
-	Mesh = CreateDefaultSubobject<UStaticMeshComponent>("Mesh");
-	RootComponent = Mesh;
 
-	Mesh->OnComponentBeginOverlap.AddDynamic(this, &ARollaBallScoreBase::OverlapBegin);
+	Sphere = CreateDefaultSubobject<USphereComponent>("Sphere");	
+	Mesh = CreateDefaultSubobject<UStaticMeshComponent>("Mesh");
+	
+	RootComponent = Sphere;
+	Mesh->SetupAttachment(Sphere);	
+
+	Sphere->OnComponentBeginOverlap.AddDynamic(this, &ARollaBallScoreBase::OverlapBegin);
 }
 
 
