@@ -22,7 +22,7 @@ public:
 	ARollaBallPlayer* MyCharacter;
 
 	UPROPERTY(EditDefaultsOnly)
-	int ResetCount = 3;
+	int ResetCount = 2;
 
 private:
 		

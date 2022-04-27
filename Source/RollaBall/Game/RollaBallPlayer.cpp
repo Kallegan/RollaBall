@@ -94,16 +94,16 @@ void ARollaBallPlayer::Release()
 
 void ARollaBallPlayer::Jump()
 {		
-	if(Supercharge > 0.2f)
+	if(Supercharge != 0)
 	{
-		const float ChargeForce = JumpImpulse * (1+Supercharge);
-		const FVector Jump = GetActorLocation().UpVector * FMath::Clamp(ChargeForce, JumpImpulse, 200000.f);
+		const float ChargeForce = JumpImpulse * (1+Supercharge/2);
+		const FVector Jump = GetActorLocation().UpVector * ChargeForce;
 	
 		Mesh->AddImpulse(Jump);				
 	}
 	else if(DashCount < MaxDashCount)
 	{
-		const FVector Jump = GetActorLocation().UpVector * JumpImpulse*2;
+		const FVector Jump = GetActorLocation().UpVector * JumpImpulse;
 		Mesh->AddImpulse(Jump);				
 	}
 	else
@@ -119,7 +119,7 @@ void ARollaBallPlayer::AirSlam()
 	if(!bSlammed)
 	{
 		Mesh->SetSimulatePhysics(false);		
-		const FVector Slam = GetActorLocation().DownVector * SlamForce * JumpImpulse;
+		const FVector Slam = GetActorLocation().DownVector * SlamForceMultiplier * SlamImpulse;
 		Mesh->SetSimulatePhysics(true);
 		Mesh->AddImpulse(Slam);
 		bSlammed = true;
@@ -169,9 +169,8 @@ void ARollaBallPlayer::OnHit(UPrimitiveComponent* HitComponent, AActor* OtherAct
 {
 	if(!bGrounded)
 	{
-		const float HitDirection = Hit.Normal.Z;	
-
-		//checks if hit is below to reset dash/ground check.
+		const float HitDirection = Hit.Normal.Z;
+		
 		if(HitDirection > 0)
 		{
 			DashCount = 0;

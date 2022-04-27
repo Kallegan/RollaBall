@@ -51,7 +51,9 @@ private:
 	UPROPERTY(EditDefaultsOnly)
 	float MoveForce = 500.f;
 	UPROPERTY(EditDefaultsOnly)
-	float JumpImpulse = 300.f;		
+	float JumpImpulse = 300.f;
+	UPROPERTY(EditDefaultsOnly)
+	float SlamImpulse = 300.f;
 	UPROPERTY(EditDefaultsOnly)
 	float CameraLookRate = 20.f;
 	UPROPERTY(EditDefaultsOnly)
@@ -59,7 +61,7 @@ private:
 	
 	float Supercharge = 0;	
 	float MaxSupercharge = 2.f;
-	float SlamForce = 5.f;	
+	float SlamForceMultiplier = 5.f;	
 	int MaxDashCount = 1;	
 	int DashCount = 0;	
 	bool bCharging = false;	
