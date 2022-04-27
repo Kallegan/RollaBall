@@ -22,9 +22,7 @@ ARollaBallPlayer::ARollaBallPlayer()
 	
 	Mesh->SetSimulatePhysics(true);
 	
-	Mesh->OnComponentHit.AddDynamic(this, &ARollaBallPlayer::OnHit);
-
-	
+	Mesh->OnComponentHit.AddDynamic(this, &ARollaBallPlayer::OnHit);	
 }	
 
 // Called when the game starts or when spawned
@@ -81,17 +79,17 @@ void ARollaBallPlayer::Release()
 		const FVector Dash = Camera->GetForwardVector().GetSafeNormal2D() * DashMultiplier;		
 		
 		Mesh->AddImpulse(Dash);		
-		Supercharge = 0.f;	
+		Supercharge = 0.f;
+		
 		if(DashCount < MaxDashCount)
 		{		
 			DashCount++;
 			bGrounded = false;
 		}
 	}
-	else
-	{
+	else	
 		Supercharge = 0;
-	}
+	
 }
 
 void ARollaBallPlayer::Jump()
@@ -137,9 +135,8 @@ void ARollaBallPlayer::ResetPosition()
 	Mesh->SetSimulatePhysics(true);
 
 	if(ARollaBallGameModeBase* GameMode = Cast<ARollaBallGameModeBase>(GetWorld()->GetAuthGameMode()))
-	{
-		GameMode->PlayerResetPosition();
-	}
+			GameMode->PlayerResetPosition();
+	
 	
 }
 

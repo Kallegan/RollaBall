@@ -6,7 +6,6 @@
 // Sets default values
 ARollaBallScoreBase::ARollaBallScoreBase()
 {
-
 	Sphere = CreateDefaultSubobject<USphereComponent>("Sphere");	
 	Mesh = CreateDefaultSubobject<UStaticMeshComponent>("Mesh");
 	
