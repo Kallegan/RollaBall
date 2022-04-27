@@ -13,15 +13,12 @@ UCLASS()
 class ROLLABALL_API ARollaBallPlayer : public APawn
 {
 	GENERATED_BODY()
-
-public:
-	// Sets default values for this pawn's properties
-	ARollaBallPlayer();
+	
+	ARollaBallPlayer();	
 
 protected:
-	// Called when the game starts or when spawned
-	virtual void BeginPlay() override;
 	
+	virtual void BeginPlay() override;	
 	
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components")
 	UStaticMeshComponent* Mesh;
@@ -51,7 +48,7 @@ private:
 	UPROPERTY(EditDefaultsOnly)
 	float MoveForce = 500.f;
 	UPROPERTY(EditDefaultsOnly)
-	float JumpImpulse = 300.f;
+	float JumpImpulse = 500.f;
 	UPROPERTY(EditDefaultsOnly)
 	float SlamImpulse = 300.f;
 	UPROPERTY(EditDefaultsOnly)

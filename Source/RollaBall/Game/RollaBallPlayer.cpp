@@ -33,6 +33,7 @@ void ARollaBallPlayer::BeginPlay()
 	//added a multiplier to reduce the total needed to see an effect when tuning stuff.
 	JumpImpulse *= 75.f;
 	MoveForce *=75.f;
+	SlamImpulse *= 75.f;
 	PlayerSpawnLocation = GetController()->GetPawn()->GetActorLocation();
 }
 
@@ -74,7 +75,7 @@ void ARollaBallPlayer::Release()
 	bCharging = false;
 	if(Supercharge > 0.2f)
 	{
-		const float DashMultiplier = JumpImpulse * (1+ Supercharge * SuperchargeMultiplier);
+		const float DashMultiplier = JumpImpulse * (1+ Supercharge/2 * SuperchargeMultiplier);
 		
 		const FVector Dash = Camera->GetForwardVector().GetSafeNormal2D() * DashMultiplier;		
 		
@@ -119,10 +120,12 @@ void ARollaBallPlayer::AirSlam()
 	if(!bSlammed)
 	{
 		Mesh->SetSimulatePhysics(false);		
-		const FVector Slam = GetActorLocation().DownVector * SlamForceMultiplier * SlamImpulse;
+		const FVector Slam = GetActorLocation().DownVector * SlamImpulse * SlamForceMultiplier;
 		Mesh->SetSimulatePhysics(true);
 		Mesh->AddImpulse(Slam);
 		bSlammed = true;
+
+		UE_LOG(LogTemp, Warning, TEXT("SLAM"))
 	}
 	
 	Supercharge = 0;
