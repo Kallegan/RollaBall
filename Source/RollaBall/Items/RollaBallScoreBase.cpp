@@ -3,7 +3,7 @@
 #include "Components/SphereComponent.h"
 #include "RollaBall/Game/RollaBallPlayer.h"
 
-// Sets default values
+
 ARollaBallScoreBase::ARollaBallScoreBase()
 {
 	Sphere = CreateDefaultSubobject<USphereComponent>("Sphere");	

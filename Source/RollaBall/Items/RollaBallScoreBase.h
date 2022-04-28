@@ -5,9 +5,10 @@
 #include "RollaBallScoreBase.generated.h"
 
 class USphereComponent;
+class UStaticMeshComponent;
 
 UCLASS()
-class ARollaBallScoreBase : public AActor
+class ROLLABALL_API ARollaBallScoreBase : public AActor
 {
 	GENERATED_BODY()
 public:

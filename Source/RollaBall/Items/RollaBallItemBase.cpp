@@ -1,11 +1,6 @@
-// Fill out your copyright notice in the Description page of Project Settings.
-
-
 #include "RollaBallItemBase.h"
 #include "RollaBall/Game/RollaBallGameModeBase.h"
 #include "RollaBall/Game/RollaBallPlayer.h"
-
-
 
 // Sets default values
 ARollaBallItemBase::ARollaBallItemBase()
