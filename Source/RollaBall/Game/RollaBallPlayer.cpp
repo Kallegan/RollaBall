@@ -67,11 +67,13 @@ void ARollaBallPlayer::SetupPlayerInputComponent(UInputComponent* PlayerInputCom
 
 void ARollaBallPlayer::Charge()
 {
-	bCharging = true;	
+	bCharging = true;
+	ChargeStarted();
 }
 
 void ARollaBallPlayer::Release()
 {
+	ChargeEnded();
 	bCharging = false;
 	if(Supercharge > 0.2f)
 	{
@@ -127,20 +129,19 @@ void ARollaBallPlayer::AirSlam()
 
 		UE_LOG(LogTemp, Warning, TEXT("SLAM"))
 	}
-	
+	SlamStarted();
 	Supercharge = 0;
 }
 
 void ARollaBallPlayer::ResetPosition()
 {
 	Mesh->SetSimulatePhysics(false);	
-	GetController()->GetPawn()->SetActorLocation(PlayerSpawnLocation);	
-	Mesh->SetSimulatePhysics(true);
+	GetController()->GetPawn()->SetActorLocation(PlayerSpawnLocation);		
 
 	if(ARollaBallGameModeBase* GameMode = Cast<ARollaBallGameModeBase>(GetWorld()->GetAuthGameMode()))
 			GameMode->PlayerResetPosition();
-	
-	
+
+	ResettingPosition();
 }
 
 void ARollaBallPlayer::MoveForward(float Value)
@@ -166,7 +167,6 @@ void ARollaBallPlayer::LookRight(float AxisValue)
 	AddControllerYawInput(AxisValue * CameraLookRate * GetWorld()->GetDeltaSeconds());
 }
 
-
 void ARollaBallPlayer::OnHit(UPrimitiveComponent* HitComponent, AActor* OtherActor,
                              UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit)
 {
@@ -183,3 +183,9 @@ void ARollaBallPlayer::OnHit(UPrimitiveComponent* HitComponent, AActor* OtherAct
 	if(bSlammed == true)
 	bSlammed = false;	
 }
+
+void ARollaBallPlayer::ResettingPosition_Implementation()
+{
+	Mesh->SetSimulatePhysics(true);
+}
+

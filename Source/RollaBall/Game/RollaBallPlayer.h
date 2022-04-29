@@ -16,25 +16,20 @@ class ROLLABALL_API ARollaBallPlayer : public APawn
 	
 	ARollaBallPlayer();	
 
-protected:
-	
+protected:	
 	virtual void BeginPlay() override;	
 	
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components")
-	UStaticMeshComponent* Mesh;
-	
+	UStaticMeshComponent* Mesh;	
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components")
-	USpringArmComponent* SpringArm;
-	
+	USpringArmComponent* SpringArm;	
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components")
 	UCameraComponent* Camera;	
 	
-	virtual void Tick(float DeltaTime) override;
-	
+	virtual void Tick(float DeltaTime) override;	
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 	
-private:
-	
+private:	
 	void Charge();
 	void Release();
 	void Jump();
@@ -44,7 +39,10 @@ private:
 	void MoveRight(float Value);
 	void LookUp(float AxisValue);
 	void LookRight(float AxisValue);
-
+	UFUNCTION()
+	void OnHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit );
+	
+public:
 	UPROPERTY(EditDefaultsOnly)
 	float MoveForce = 500.f;
 	UPROPERTY(EditDefaultsOnly)
@@ -54,23 +52,30 @@ private:
 	UPROPERTY(EditDefaultsOnly)
 	float CameraLookRate = 20.f;
 	UPROPERTY(EditDefaultsOnly)
-	float SuperchargeMultiplier = 2.f;	
-	
-	float Supercharge = 0;	
+	float SuperchargeMultiplier = 2.f;
+	UPROPERTY(EditDefaultsOnly)
 	float MaxSupercharge = 2.f;
+	UPROPERTY(EditDefaultsOnly)
 	float SlamForceMultiplier = 5.f;	
+private:	
+	float Supercharge = 0;		
 	int MaxDashCount = 1;	
-	int DashCount = 0;	
-	bool bCharging = false;	
+	int DashCount = 0;		
 	bool bSlammed = false;
 	bool bGrounded = true;
-
+	bool bCharging = false;	
 	FVector PlayerSpawnLocation{};
 
-	UFUNCTION()
-	void OnHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit );
-	
 public:
 	float GetCurrentSupercharge() const { return Supercharge;}
-	float GetMaxCharge() const { return MaxSupercharge;}		
+	float GetMaxCharge() const { return MaxSupercharge;}
+	
+	UFUNCTION(BlueprintImplementableEvent)
+	void ChargeStarted();
+	UFUNCTION(BlueprintImplementableEvent)
+	void ChargeEnded();
+	UFUNCTION(BlueprintImplementableEvent)
+	void SlamStarted();
+	UFUNCTION(BlueprintNativeEvent)
+	void ResettingPosition();
 };
