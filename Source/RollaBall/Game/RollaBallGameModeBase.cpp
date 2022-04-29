@@ -77,9 +77,7 @@ void ARollaBallGameModeBase::UpdateSupercharge()
 void ARollaBallGameModeBase::PlayerResetPosition()
 {
 	ResetCount--;
-	GameWidget->SetPlayerResetRemaning(ResetCount);
-	if(ResetCount < 0)	
-		MyCharacter->Destroy();	
+	GameWidget->SetPlayerResetRemaning(ResetCount);	
 }
 
 

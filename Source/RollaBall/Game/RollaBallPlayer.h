@@ -44,6 +44,8 @@ private:
 	
 public:
 	UPROPERTY(EditDefaultsOnly)
+	int ResetCount = 2;	
+	UPROPERTY(EditDefaultsOnly)
 	float MoveForce = 500.f;
 	UPROPERTY(EditDefaultsOnly)
 	float JumpImpulse = 500.f;
@@ -57,6 +59,8 @@ public:
 	float MaxSupercharge = 2.f;
 	UPROPERTY(EditDefaultsOnly)
 	float SlamForceMultiplier = 5.f;
+	UPROPERTY(EditDefaultsOnly)
+	int CurrentLives = 3;
 	
 private:	
 	float Supercharge = 0;		

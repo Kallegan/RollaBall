@@ -142,6 +142,10 @@ void ARollaBallPlayer::ResetPosition()
 			GameMode->PlayerResetPosition();
 
 	ResettingPosition();
+	CurrentLives--;
+
+	if(CurrentLives <= 0)
+		Destroy();
 }
 
 void ARollaBallPlayer::MoveForward(float Value)
