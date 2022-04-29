@@ -44,13 +44,7 @@ private:
 	
 public:
 	UPROPERTY(EditDefaultsOnly)
-	int ResetCount = 2;	
-	UPROPERTY(EditDefaultsOnly)
-	float MoveForce = 500.f;
-	UPROPERTY(EditDefaultsOnly)
-	float JumpImpulse = 500.f;
-	UPROPERTY(EditDefaultsOnly)
-	float SlamImpulse = 300.f;
+	int ResetCount = 2;		
 	UPROPERTY(EditDefaultsOnly)
 	float CameraLookRate = 20.f;
 	UPROPERTY(EditDefaultsOnly)
@@ -68,7 +62,10 @@ private:
 	int DashCount = 0;		
 	bool bSlammed = false;
 	bool bGrounded = true;
-	bool bCharging = false;	
+	bool bCharging = false;
+	float MoveForce = 500.f;	
+	float JumpImpulse = 500.f;	
+	float SlamImpulse = 300.f;
 	FVector PlayerSpawnLocation{};
 
 public:

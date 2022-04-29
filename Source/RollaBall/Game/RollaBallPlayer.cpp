@@ -48,8 +48,8 @@ void ARollaBallPlayer::Tick(float DeltaTime)
 
 void ARollaBallPlayer::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
-	Super::SetupPlayerInputComponent(PlayerInputComponent);	
-	
+	Super::SetupPlayerInputComponent(PlayerInputComponent);
+		
 	InputComponent->BindAction("SuperCharge", IE_Pressed, this, &ARollaBallPlayer::Charge);
 	InputComponent->BindAction("SuperCharge", IE_Released, this, &ARollaBallPlayer::Release);
 
@@ -62,7 +62,7 @@ void ARollaBallPlayer::SetupPlayerInputComponent(UInputComponent* PlayerInputCom
 	InputComponent->BindAxis("MoveRight", this, &ARollaBallPlayer::MoveRight);
 
 	InputComponent->BindAxis("LookUp", this, &ARollaBallPlayer::LookUp);
-	InputComponent->BindAxis("LookRight", this, &ARollaBallPlayer::LookRight);	
+	InputComponent->BindAxis("LookRight", this, &ARollaBallPlayer::LookRight);
 }
 
 void ARollaBallPlayer::Charge()
@@ -125,9 +125,7 @@ void ARollaBallPlayer::AirSlam()
 		const FVector Slam = GetActorLocation().DownVector * SlamImpulse * SlamForceMultiplier;
 		Mesh->SetSimulatePhysics(true);
 		Mesh->AddImpulse(Slam);
-		bSlammed = true;
-
-		UE_LOG(LogTemp, Warning, TEXT("SLAM"))
+		bSlammed = true;		
 	}
 	SlamStarted();
 	Supercharge = 0;
@@ -135,17 +133,25 @@ void ARollaBallPlayer::AirSlam()
 
 void ARollaBallPlayer::ResetPosition()
 {
-	Mesh->SetSimulatePhysics(false);	
-	GetController()->GetPawn()->SetActorLocation(PlayerSpawnLocation);		
+	JumpImpulse = 0;
+	MoveForce = 0;
+	SlamImpulse = 0;
+	Mesh->SetSimulatePhysics(false);
+	Mesh->SetSimulatePhysics(true);
+	
+	if(CurrentLives > 0)
+	{		
+		GetController()->GetPawn()->SetActorLocation(PlayerSpawnLocation);		
 
-	if(ARollaBallGameModeBase* GameMode = Cast<ARollaBallGameModeBase>(GetWorld()->GetAuthGameMode()))
+		if(ARollaBallGameModeBase* GameMode = Cast<ARollaBallGameModeBase>(GetWorld()->GetAuthGameMode()))
 			GameMode->PlayerResetPosition();
 
-	ResettingPosition();
-	CurrentLives--;
+		ResettingPosition();
+		CurrentLives--;
 
-	if(CurrentLives <= 0)
-		Destroy();
+		if(CurrentLives <= 0)
+			Destroy();			
+	}	
 }
 
 void ARollaBallPlayer::MoveForward(float Value)
@@ -190,6 +196,8 @@ void ARollaBallPlayer::OnHit(UPrimitiveComponent* HitComponent, AActor* OtherAct
 
 void ARollaBallPlayer::ResettingPosition_Implementation()
 {
-	Mesh->SetSimulatePhysics(true);
+	JumpImpulse = 500*75.f;
+	MoveForce = 500*75.f;
+	SlamImpulse = 300*75.f;
 }
 
