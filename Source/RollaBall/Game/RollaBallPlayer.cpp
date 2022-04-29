@@ -66,9 +66,9 @@ void ARollaBallPlayer::SetupPlayerInputComponent(UInputComponent* PlayerInputCom
 }
 
 void ARollaBallPlayer::Charge()
-{
+{	
 	bCharging = true;
-	ChargeStarted();
+	ChargeStarted();	
 }
 
 void ARollaBallPlayer::Release()

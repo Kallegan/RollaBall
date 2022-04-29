@@ -56,7 +56,8 @@ public:
 	UPROPERTY(EditDefaultsOnly)
 	float MaxSupercharge = 2.f;
 	UPROPERTY(EditDefaultsOnly)
-	float SlamForceMultiplier = 5.f;	
+	float SlamForceMultiplier = 5.f;
+	
 private:	
 	float Supercharge = 0;		
 	int MaxDashCount = 1;	

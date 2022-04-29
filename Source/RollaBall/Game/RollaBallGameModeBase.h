@@ -15,29 +15,21 @@ class ROLLABALL_API ARollaBallGameModeBase : public AGameModeBase
 	GENERATED_BODY()
 
 	
-public:
+private:
 	ARollaBallGameModeBase();
 	
 	UPROPERTY()
-	ARollaBallPlayer* MyCharacter;
+	ARollaBallPlayer* MyCharacter;	
 
-	UPROPERTY(EditDefaultsOnly)
-	int ResetCount = 2;
-
-private:
-		
 	virtual void Tick(float DeltaSeconds) override;
 	
 protected:
-
+	
 	int ItemsCollected = 0;
 	int ItemsInLevel = 0;
-	int CoinScore = 0;
-	
-	
+	int CoinScore = 0;	
 	float CurrentSupercharge = 0;
-	float MaxSuperCharge = 0;
-	
+	float MaxSuperCharge = 0;	
 
 	UPROPERTY(EditAnywhere, Category= "Widgets")
 	TSubclassOf<UUserWidget> GameWidgetClass;
@@ -55,5 +47,7 @@ public:
 	void CoinCollected();
 	void UpdateSupercharge();
 	void PlayerResetPosition();
-	
+
+	UPROPERTY(EditDefaultsOnly)
+	int ResetCount = 2;	
 };
